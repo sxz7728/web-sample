@@ -1,0 +1,15 @@
+/web-sample-core/.project
+/web-sample-core/.settings
+/web-sample-core/target
+/web-sample-core/.classpath
+/.project
+/.settings
+
+/web-sample-springmvc/.project
+/web-sample-springmvc/.settings
+/web-sample-springmvc/target
+/web-sample-springmvc/.classpath
+/web-sample-struts2/.project
+/web-sample-struts2/.settings
+/web-sample-struts2/target
+/web-sample-struts2/.classpath

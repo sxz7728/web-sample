@@ -12,25 +12,22 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "sys_user")
-public class SysUser {
+@Table(name = "sys_area")
+public class SysArea {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private String username;
-
-	private String password;
-
-	private String salt;
-
 	private String type;
 
-	private String state;
+	@Column(name = "area_key")
+	private String areaKey;
 
-	private String nickname;
+	@Column(name = "area_value")
+	private String areaValue;
 
-	private String email;
+	@Column(name = "parent_key")
+	private String parentKey;
 
 	@Column(name = "del_flag")
 	private String delFlag;
@@ -50,30 +47,6 @@ public class SysUser {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
-
 	public String getType() {
 		return type;
 	}
@@ -82,28 +55,28 @@ public class SysUser {
 		this.type = type;
 	}
 
-	public String getState() {
-		return state;
+	public String getAreaKey() {
+		return areaKey;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setAreaKey(String areaKey) {
+		this.areaKey = areaKey;
 	}
 
-	public String getNickname() {
-		return nickname;
+	public String getAreaValue() {
+		return areaValue;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setAreaValue(String areaValue) {
+		this.areaValue = areaValue;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getParentKey() {
+		return parentKey;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setParentKey(String parentKey) {
+		this.parentKey = parentKey;
 	}
 
 	public String getDelFlag() {

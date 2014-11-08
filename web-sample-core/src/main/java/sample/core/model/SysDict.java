@@ -18,8 +18,8 @@ public class SysDict {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "dict_type")
-	private String dictType;
+	@Column(name = "type")
+	private String type;
 
 	@Column(name = "dict_key")
 	private String dictKey;
@@ -50,12 +50,12 @@ public class SysDict {
 		this.id = id;
 	}
 
-	public String getDictType() {
-		return dictType;
+	public String getType() {
+		return type;
 	}
 
-	public void setDictType(String dictType) {
-		this.dictType = dictType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getDictKey() {

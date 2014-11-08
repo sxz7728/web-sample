@@ -26,6 +26,10 @@ public class QueryBuilder {
 		this.length = length;
 	}
 
+	public QueryBuilder addColumn(String str) {
+		return this;
+	}
+
 	public QueryBuilder addColumn(String str, Object obj) {
 		return this;
 	}

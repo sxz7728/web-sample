@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "sys_file")
+@Table(name = "SYS_FILE")
 public class SysFile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

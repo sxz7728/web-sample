@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "sys_module")
+@Table(name = "SYS_MODULE")
 public class SysModule {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

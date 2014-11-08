@@ -1,12 +1,16 @@
 package sample.core.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,6 +35,10 @@ public class SysUser {
 	private String nickname;
 
 	private String email;
+
+	@ManyToMany
+	@JoinTable(name = "sys_user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+	private List<SysRole> sysRoles;
 
 	@Column(name = "del_flag")
 	private String delFlag;
@@ -104,6 +112,14 @@ public class SysUser {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<SysRole> getSysRoles() {
+		return sysRoles;
+	}
+
+	public void setSysRoles(List<SysRole> sysRoles) {
+		this.sysRoles = sysRoles;
 	}
 
 	public String getDelFlag() {

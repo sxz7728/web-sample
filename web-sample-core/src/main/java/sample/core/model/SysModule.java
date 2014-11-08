@@ -1,12 +1,14 @@
 package sample.core.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,6 +23,9 @@ public class SysModule {
 	private String name;
 
 	private Integer sequence;
+
+	@OneToMany(mappedBy = "sysModule")
+	private List<SysMenu> sysMenus;
 
 	@Column(name = "del_flag")
 	private String delFlag;
@@ -54,6 +59,14 @@ public class SysModule {
 
 	public void setSequence(Integer sequence) {
 		this.sequence = sequence;
+	}
+
+	public List<SysMenu> getSysMenus() {
+		return sysMenus;
+	}
+
+	public void setSysMenus(List<SysMenu> sysMenus) {
+		this.sysMenus = sysMenus;
 	}
 
 	public String getDelFlag() {

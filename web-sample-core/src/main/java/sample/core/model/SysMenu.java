@@ -1,12 +1,15 @@
 package sample.core.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,6 +37,12 @@ public class SysMenu {
 	private String url5;
 
 	private Integer sequence;
+
+	@ManyToOne
+	private SysModule sysModule;
+
+	@ManyToMany(mappedBy = "sysMenus")
+	private List<SysRole> sysRoles;
 
 	@Column(name = "del_flag")
 	private String delFlag;
@@ -115,6 +124,22 @@ public class SysMenu {
 
 	public void setSequence(Integer sequence) {
 		this.sequence = sequence;
+	}
+
+	public SysModule getSysModule() {
+		return sysModule;
+	}
+
+	public void setSysModule(SysModule sysModule) {
+		this.sysModule = sysModule;
+	}
+
+	public List<SysRole> getSysRoles() {
+		return sysRoles;
+	}
+
+	public void setSysRoles(List<SysRole> sysRoles) {
+		this.sysRoles = sysRoles;
 	}
 
 	public String getDelFlag() {

@@ -1,12 +1,16 @@
 package sample.core.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,6 +23,13 @@ public class SysRole {
 	private Integer id;
 
 	private String name;
+
+	@ManyToMany
+	@JoinTable(name = "sys_role_menu", joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = { @JoinColumn(name = "menu_id") })
+	private List<SysMenu> sysMenus;
+
+	@ManyToMany(mappedBy = "sysRoles")
+	private List<SysUser> sysUsers;
 
 	@Column(name = "del_flag")
 	private String delFlag;
@@ -44,6 +55,22 @@ public class SysRole {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<SysMenu> getSysMenus() {
+		return sysMenus;
+	}
+
+	public void setSysMenus(List<SysMenu> sysMenus) {
+		this.sysMenus = sysMenus;
+	}
+
+	public List<SysUser> getSysUsers() {
+		return sysUsers;
+	}
+
+	public void setSysUsers(List<SysUser> sysUsers) {
+		this.sysUsers = sysUsers;
 	}
 
 	public String getDelFlag() {

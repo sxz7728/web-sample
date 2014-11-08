@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "SYS_DICT")
+@Table(name = "sys_dict")
 public class SysDict {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

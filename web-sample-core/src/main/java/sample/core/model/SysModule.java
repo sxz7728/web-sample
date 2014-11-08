@@ -12,26 +12,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "sys_menu")
-public class SysMenu {
+@Table(name = "sys_module")
+public class SysModule {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "parent_id")
-	private Integer parentId;
-
 	private String name;
-
-	private String url1;
-
-	private String url2;
-
-	private String url3;
-
-	private String url4;
-
-	private String url5;
 
 	private Integer sequence;
 
@@ -53,60 +40,12 @@ public class SysMenu {
 		this.id = id;
 	}
 
-	public Integer getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
-	}
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getUrl1() {
-		return url1;
-	}
-
-	public void setUrl1(String url1) {
-		this.url1 = url1;
-	}
-
-	public String getUrl2() {
-		return url2;
-	}
-
-	public void setUrl2(String url2) {
-		this.url2 = url2;
-	}
-
-	public String getUrl3() {
-		return url3;
-	}
-
-	public void setUrl3(String url3) {
-		this.url3 = url3;
-	}
-
-	public String getUrl4() {
-		return url4;
-	}
-
-	public void setUrl4(String url4) {
-		this.url4 = url4;
-	}
-
-	public String getUrl5() {
-		return url5;
-	}
-
-	public void setUrl5(String url5) {
-		this.url5 = url5;
 	}
 
 	public Integer getSequence() {

@@ -12,26 +12,27 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "sys_menu")
-public class SysMenu {
+@Table(name = "sys_file")
+public class SysFile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "parent_id")
-	private Integer parentId;
+	@Column(name = "relation_type")
+	private String relationType;
+
+	@Column(name = "relation_id")
+	private Integer relationId;
+
+	private String type;
 
 	private String name;
 
-	private String url1;
+	private String path;
 
-	private String url2;
+	private String suffix;
 
-	private String url3;
-
-	private String url4;
-
-	private String url5;
+	private Integer size;
 
 	private Integer sequence;
 
@@ -53,12 +54,28 @@ public class SysMenu {
 		this.id = id;
 	}
 
-	public Integer getParentId() {
-		return parentId;
+	public String getRelationType() {
+		return relationType;
 	}
 
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
+	public void setRelationType(String relationType) {
+		this.relationType = relationType;
+	}
+
+	public Integer getRelationId() {
+		return relationId;
+	}
+
+	public void setRelationId(Integer relationId) {
+		this.relationId = relationId;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getName() {
@@ -69,44 +86,28 @@ public class SysMenu {
 		this.name = name;
 	}
 
-	public String getUrl1() {
-		return url1;
+	public String getPath() {
+		return path;
 	}
 
-	public void setUrl1(String url1) {
-		this.url1 = url1;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
-	public String getUrl2() {
-		return url2;
+	public String getSuffix() {
+		return suffix;
 	}
 
-	public void setUrl2(String url2) {
-		this.url2 = url2;
+	public void setSuffix(String suffix) {
+		this.suffix = suffix;
 	}
 
-	public String getUrl3() {
-		return url3;
+	public Integer getSize() {
+		return size;
 	}
 
-	public void setUrl3(String url3) {
-		this.url3 = url3;
-	}
-
-	public String getUrl4() {
-		return url4;
-	}
-
-	public void setUrl4(String url4) {
-		this.url4 = url4;
-	}
-
-	public String getUrl5() {
-		return url5;
-	}
-
-	public void setUrl5(String url5) {
-		this.url5 = url5;
+	public void setSize(Integer size) {
+		this.size = size;
 	}
 
 	public Integer getSequence() {

@@ -22,6 +22,12 @@ public class SysUser {
 
 	private String password;
 
+	private String salt;
+
+	private String type;
+
+	private String state;
+
 	@Column(name = "del_flag")
 	private String delFlag;
 
@@ -54,6 +60,30 @@ public class SysUser {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public String getDelFlag() {

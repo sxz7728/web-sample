@@ -150,7 +150,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 		Class<U> entityClass = (Class<U>) ((ParameterizedType) getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 
-		if (entityClass.isAssignableFrom(Map.class)) {
+		if (Map.class.isAssignableFrom(entityClass)) {
 			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		} else if (!entityClass.equals(modelClass)) {
 			query.setResultTransformer(Transformers.aliasToBean(entityClass));
@@ -176,7 +176,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 		Class<U> entityClass = (Class<U>) ((ParameterizedType) getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 
-		if (entityClass.isAssignableFrom(Map.class)) {
+		if (Map.class.isAssignableFrom(entityClass)) {
 			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		} else {
 			query.setResultTransformer(Transformers.aliasToBean(entityClass));

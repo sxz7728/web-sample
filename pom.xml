@@ -9,6 +9,7 @@
 		<module>web-sample-core</module>
 		<module>web-sample-struts2</module>
 		<module>web-sample-springmvc</module>
+		<module>web-sample-resources</module>
 	</modules>
 
 	<properties>

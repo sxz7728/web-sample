@@ -1,5 +1,6 @@
 package sample.core.utils;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -12,7 +13,7 @@ public class QueryBuilder {
 
 	private StringBuilder order = new StringBuilder();
 
-	private List<Object> params = Lists.newArrayList();
+	private List<Object> paramters = Lists.newArrayList();
 
 	private int start = 0;
 
@@ -27,18 +28,53 @@ public class QueryBuilder {
 	}
 
 	public QueryBuilder addColumn(String str) {
+		if (column.length() > 0) {
+			column.append(",");
+		}
+
+		column.append(str);
 		return this;
 	}
 
-	public QueryBuilder addColumn(String str, Object obj) {
+	public QueryBuilder addColumn(String str, Object param) {
+		if (column.length() > 0) {
+			column.append(",");
+		}
+
+		paramters.add(param);
+		column.append(MessageFormat.format(str, ":" + paramters.size()));
 		return this;
 	}
 
-	public QueryBuilder addWhere(String str, Object... objs) {
+	public QueryBuilder addWhere(String str, Object... params) {
+		if (params.length == 0) {
+			where.append(" ").append(str);
+		} else if (params.length == 1) {
+			paramters.add(params[0]);
+			where.append(" ").append(
+					MessageFormat.format(str, ":" + paramters.size()));
+		} else {
+			List<String> args = Lists.newArrayList();
+
+			for (Object param : params) {
+				paramters.add(param);
+				args.add(":" + paramters.size());
+			}
+
+			where.append(" ").append(MessageFormat.format(str, args.toArray()));
+		}
+
 		return this;
 	}
 
 	public QueryBuilder addOrder(String str) {
+		if (order.length() > 0) {
+			order.append(",");
+		} else {
+			order.append(" order by ");
+		}
+
+		order.append(str);
 		return this;
 	}
 
@@ -58,8 +94,8 @@ public class QueryBuilder {
 		return order.toString();
 	}
 
-	public List<Object> getParams() {
-		return params;
+	public List<Object> getParamters() {
+		return paramters;
 	}
 
 	public int getStart() {

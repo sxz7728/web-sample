@@ -98,7 +98,8 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 		assert (qb.hasWhere());
 		String hql = MessageFormat.format(HQL_UPDATE, qb.getColumn(),
 				qb.getWhere());
-		Query query = setParams(getSession().createQuery(hql), qb.getParams());
+		Query query = setParams(getSession().createQuery(hql),
+				qb.getParamters());
 		return query.executeUpdate();
 	}
 
@@ -116,7 +117,8 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	public Integer delete(QueryBuilder qb) {
 		assert (qb.hasWhere());
 		String hql = MessageFormat.format(HQL_DELETE, qb.getWhere());
-		Query query = setParams(getSession().createQuery(hql), qb.getParams());
+		Query query = setParams(getSession().createQuery(hql),
+				qb.getParamters());
 		return query.executeUpdate();
 	}
 
@@ -124,13 +126,13 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	public List<T> find(QueryBuilder qb) {
 		String hql = MessageFormat.format(HQL_FIND, qb.getWhere(),
 				qb.getOrder());
-		return hqlList(hql, qb.getParams(), qb.getStart(), qb.getLength());
+		return hqlList(hql, qb.getParamters(), qb.getStart(), qb.getLength());
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public Integer count(QueryBuilder qb) {
 		String hql = MessageFormat.format(HQL_FIND, qb.getWhere());
-		return hqlUnique(hql, qb.getParams());
+		return hqlUnique(hql, qb.getParamters());
 	}
 
 	@SuppressWarnings("unchecked")

@@ -1,7 +1,6 @@
 package sample.core.dao.impl;
 
 import java.lang.reflect.ParameterizedType;
-import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sample.core.dao.BaseDao;
 import sample.core.utils.QueryBuilder;
+import sample.core.utils.Utilities;
 
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	public final Class<T> modelClass;
@@ -96,7 +96,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Integer update(QueryBuilder qb) {
 		assert (qb.hasWhere());
-		String hql = MessageFormat.format(HQL_UPDATE, qb.getColumn(),
+		String hql = Utilities.format(HQL_UPDATE, qb.getColumn(),
 				qb.getWhere());
 		Query query = setParams(getSession().createQuery(hql),
 				qb.getParamters());
@@ -116,7 +116,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Integer delete(QueryBuilder qb) {
 		assert (qb.hasWhere());
-		String hql = MessageFormat.format(HQL_DELETE, qb.getWhere());
+		String hql = Utilities.format(HQL_DELETE, qb.getWhere());
 		Query query = setParams(getSession().createQuery(hql),
 				qb.getParamters());
 		return query.executeUpdate();
@@ -124,14 +124,14 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public List<T> find(QueryBuilder qb) {
-		String hql = MessageFormat.format(HQL_FIND, qb.getWhere(),
+		String hql = Utilities.format(HQL_FIND, qb.getWhere(),
 				qb.getOrder());
 		return hqlList(hql, qb.getParamters(), qb.getStart(), qb.getLength());
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public Integer count(QueryBuilder qb) {
-		String hql = MessageFormat.format(HQL_FIND, qb.getWhere());
+		String hql = Utilities.format(HQL_FIND, qb.getWhere());
 		return hqlUnique(hql, qb.getParamters());
 	}
 

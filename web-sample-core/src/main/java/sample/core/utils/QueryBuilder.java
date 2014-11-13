@@ -1,6 +1,5 @@
 package sample.core.utils;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -42,7 +41,7 @@ public class QueryBuilder {
 		}
 
 		paramters.add(param);
-		column.append(MessageFormat.format(str, ":" + paramters.size()));
+		column.append(Utilities.format(str, ":" + paramters.size()));
 		return this;
 	}
 
@@ -52,7 +51,7 @@ public class QueryBuilder {
 		} else if (params.length == 1) {
 			paramters.add(params[0]);
 			where.append(" ").append(
-					MessageFormat.format(str, ":" + paramters.size()));
+					Utilities.format(str, ":" + paramters.size()));
 		} else {
 			List<String> args = Lists.newArrayList();
 
@@ -61,7 +60,7 @@ public class QueryBuilder {
 				args.add(":" + paramters.size());
 			}
 
-			where.append(" ").append(MessageFormat.format(str, args.toArray()));
+			where.append(" ").append(Utilities.format(str, args.toArray()));
 		}
 
 		return this;

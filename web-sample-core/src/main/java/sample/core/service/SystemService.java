@@ -23,4 +23,14 @@ public interface SystemService {
 	public SysMenu updateMenu(Integer id, Integer parentId, String name,
 			String url, Integer sequence, UserInfo userInfo, int index);
 
+	// Role
+
+	// User
+
+	// Dict
+
+	// Area
+
+	// File
+
 }

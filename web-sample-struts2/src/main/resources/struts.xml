@@ -27,7 +27,7 @@
 				<interceptor-ref name="modelDriven" />
 				<interceptor-ref name="fileUpload" />
 				<interceptor-ref name="checkbox" />
-				<interceptor-ref name="datetime" />
+				<!-- <interceptor-ref name="datetime" /> -->
 				<interceptor-ref name="multiselect" />
 				<interceptor-ref name="staticParams" />
 				<interceptor-ref name="actionMappingParams" />
@@ -36,10 +36,10 @@
 				</interceptor-ref>
 				<interceptor-ref name="conversionError" />
 				<interceptor-ref name="validation">
-					<param name="excludeMethods">input,back,cancel,browse</param>
+					<param name="includeMethods">save</param>
 				</interceptor-ref>
 				<interceptor-ref name="workflow">
-					<param name="excludeMethods">input,back,cancel,browse</param>
+					<param name="includeMethods">save</param>
 				</interceptor-ref>
 				<interceptor-ref name="debugging" />
 				<interceptor-ref name="deprecation" />

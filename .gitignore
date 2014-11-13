@@ -19,3 +19,6 @@
 
 /web-sample-resources/target
 /web-sample-struts2/work
+
+/web-sample-struts2/.tomcatplugin
+/web-sample-struts2/src/main/webapp/.#webclasspath

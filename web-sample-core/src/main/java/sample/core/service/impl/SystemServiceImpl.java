@@ -116,4 +116,14 @@ public class SystemServiceImpl implements SystemService {
 		sysMenu.setOperateDate(userInfo.getOperateDate());
 		return sysMenuDao.update(sysMenu);
 	}
+
+	// Role
+
+	// User
+
+	// Dict
+
+	// Area
+
+	// File
 }

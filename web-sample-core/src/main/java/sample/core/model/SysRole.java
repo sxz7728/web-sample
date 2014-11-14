@@ -23,6 +23,8 @@ public class SysRole {
 	private Integer id;
 
 	private String name;
+	
+	private Integer sequence;
 
 	@ManyToMany
 	@JoinTable(name = "sys_role_menu", joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = { @JoinColumn(name = "menu_id") })
@@ -31,8 +33,8 @@ public class SysRole {
 	@ManyToMany(mappedBy = "sysRoles")
 	private List<SysUser> sysUsers;
 
-	@Column(name = "del_flag")
-	private String delFlag;
+	@Column(name = "deleted")
+	private String deleted;
 
 	@Column(name = "operator_id")
 	private Integer operatorId;
@@ -56,6 +58,14 @@ public class SysRole {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public Integer getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(Integer sequence) {
+		this.sequence = sequence;
+	}
 
 	public List<SysMenu> getSysMenus() {
 		return sysMenus;
@@ -73,12 +83,12 @@ public class SysRole {
 		this.sysUsers = sysUsers;
 	}
 
-	public String getDelFlag() {
-		return delFlag;
+	public String getDeleted() {
+		return deleted;
 	}
 
-	public void setDelFlag(String delFlag) {
-		this.delFlag = delFlag;
+	public void setDeleted(String deleted) {
+		this.deleted = deleted;
 	}
 
 	public Integer getOperatorId() {

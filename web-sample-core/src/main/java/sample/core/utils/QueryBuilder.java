@@ -1,5 +1,6 @@
 package sample.core.utils;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -50,14 +51,26 @@ public class QueryBuilder {
 			where.append(" ").append(str);
 		} else if (params.length == 1) {
 			paramters.add(params[0]);
-			where.append(" ").append(
-					Utilities.format(str, ":" + paramters.size()));
+
+			if (params[0] instanceof Collection) {
+				where.append(" ").append(
+						Utilities.format(str, "(:" + paramters.size() + ")"));
+			} else {
+				where.append(" ").append(
+						Utilities.format(str, ":" + paramters.size()));
+			}
+
 		} else {
 			List<String> args = Lists.newArrayList();
 
 			for (Object param : params) {
 				paramters.add(param);
-				args.add(":" + paramters.size());
+
+				if (params[0] instanceof Collection) {
+					args.add("(:" + paramters.size() + ")");
+				} else {
+					args.add(":" + paramters.size());
+				}
 			}
 
 			where.append(" ").append(Utilities.format(str, args.toArray()));

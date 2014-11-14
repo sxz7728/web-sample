@@ -36,8 +36,8 @@ public class SysFile {
 
 	private Integer sequence;
 
-	@Column(name = "del_flag")
-	private String delFlag;
+	@Column(name = "deleted")
+	private String deleted;
 
 	@Column(name = "operator_id")
 	private Integer operatorId;
@@ -118,12 +118,12 @@ public class SysFile {
 		this.sequence = sequence;
 	}
 
-	public String getDelFlag() {
-		return delFlag;
+	public String getDeleted() {
+		return deleted;
 	}
 
-	public void setDelFlag(String delFlag) {
-		this.delFlag = delFlag;
+	public void setDeleted(String deleted) {
+		this.deleted = deleted;
 	}
 
 	public Integer getOperatorId() {

@@ -2,7 +2,6 @@ package sample.core.service.impl;
 
 import java.util.List;
 
-import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -87,19 +86,13 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public SysMenu saveMenu(int index, Integer moduleId, Integer parentId,
+	public SysMenu saveMenu(Integer moduleId, Integer parentId,
 			String name, String url, Integer sequence, UserInfo userInfo) {
 		SysMenu sysMenu = new SysMenu();
 		sysMenu.setSysModule(sysModuleDao.load(moduleId));
 		sysMenu.setParentId(parentId);
 		sysMenu.setName(name);
-
-		try {
-			PropertyUtils.setProperty(sysMenu, "url" + index, url);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-
+		sysMenu.setUrl(url);
 		sysMenu.setSequence(sequence);
 		sysMenu.setDeleted(DictUtils.NO);
 		sysMenu.setOperatorId(userInfo.getUserId());
@@ -108,18 +101,12 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public SysMenu updateMenu(int index, Integer id, Integer parentId,
+	public SysMenu updateMenu(Integer id, Integer parentId,
 			String name, String url, Integer sequence, UserInfo userInfo) {
 		SysMenu sysMenu = sysMenuDao.load(id);
 		sysMenu.setParentId(parentId);
 		sysMenu.setName(name);
-
-		try {
-			PropertyUtils.setProperty(sysMenu, "url" + index, url);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-
+		sysMenu.setUrl(url);
 		sysMenu.setSequence(sequence);
 		sysMenu.setOperatorId(userInfo.getUserId());
 		sysMenu.setOperateDate(userInfo.getOperateDate());

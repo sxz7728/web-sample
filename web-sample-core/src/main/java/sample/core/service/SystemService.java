@@ -23,11 +23,11 @@ public interface SystemService {
 	// Menu
 	public SysMenu loadMenu(Integer id);
 
-	public SysMenu saveMenu(int index, Integer moduleId, Integer parentId,
-			String name, String url, Integer sequence, UserInfo userInfo);
+	public SysMenu saveMenu(Integer moduleId, Integer parentId, String name,
+			String url, Integer sequence, UserInfo userInfo);
 
-	public SysMenu updateMenu(int index, Integer id, Integer parentId,
-			String name, String url, Integer sequence, UserInfo userInfo);
+	public SysMenu updateMenu(Integer id, Integer parentId, String name,
+			String url, Integer sequence, UserInfo userInfo);
 
 	// Role
 	public SysRole loadRole(Integer id);

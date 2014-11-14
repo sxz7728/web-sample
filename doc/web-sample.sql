@@ -30,7 +30,7 @@ CREATE TABLE `sys_area` (
   `area_key` varchar(10) DEFAULT NULL,
   `area_value` varchar(50) DEFAULT NULL,
   `parent_key` varchar(10) DEFAULT NULL,
-  `del_flag` char(1) DEFAULT NULL,
+  `deleted` char(1) DEFAULT NULL,
   `operator_id` int(11) DEFAULT NULL,
   `operate_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -60,7 +60,7 @@ CREATE TABLE `sys_dict` (
   `dict_value` varchar(50) DEFAULT NULL,
   `parent_key` varchar(10) DEFAULT NULL,
   `sequence` int(11) DEFAULT NULL,
-  `del_flag` char(1) DEFAULT NULL,
+  `deleted` char(1) DEFAULT NULL,
   `operator_id` int(11) DEFAULT NULL,
   `operate_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -93,7 +93,7 @@ CREATE TABLE `sys_file` (
   `suffix` varchar(50) DEFAULT NULL,
   `size` int(11) DEFAULT NULL,
   `sequence` int(11) DEFAULT NULL,
-  `del_flag` char(1) DEFAULT NULL,
+  `deleted` char(1) DEFAULT NULL,
   `operator_id` int(11) DEFAULT NULL,
   `operate_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -121,13 +121,9 @@ CREATE TABLE `sys_menu` (
   `module_id` int(11) DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
-  `url1` varchar(100) DEFAULT NULL,
-  `url2` varchar(100) DEFAULT NULL,
-  `url3` varchar(100) DEFAULT NULL,
-  `url4` varchar(100) DEFAULT NULL,
-  `url5` varchar(100) DEFAULT NULL,
+  `url` varchar(100) DEFAULT NULL,
   `sequence` int(11) DEFAULT NULL,
-  `del_flag` char(1) DEFAULT NULL,
+  `deleted` char(1) DEFAULT NULL,
   `operator_id` int(11) DEFAULT NULL,
   `operate_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -156,7 +152,7 @@ CREATE TABLE `sys_module` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `sequence` int(11) DEFAULT NULL,
-  `del_flag` char(1) DEFAULT NULL,
+  `deleted` char(1) DEFAULT NULL,
   `operator_id` int(11) DEFAULT NULL,
   `operate_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -183,7 +179,7 @@ CREATE TABLE `sys_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `sequence` int(11) DEFAULT NULL,
-  `del_flag` char(1) DEFAULT NULL,
+  `deleted` char(1) DEFAULT NULL,
   `operator_id` int(11) DEFAULT NULL,
   `operate_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -242,7 +238,7 @@ CREATE TABLE `sys_user` (
   `state` varchar(10) DEFAULT NULL,
   `nickname` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `del_flag` char(1) DEFAULT NULL,
+  `deleted` char(1) DEFAULT NULL,
   `operator_id` int(11) DEFAULT NULL,
   `operate_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -302,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-13 19:33:18
+-- Dump completed on 2014-11-14 20:31:01

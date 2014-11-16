@@ -11,19 +11,4 @@ public class Main extends BaseAction {
 	public String execute() {
 		return INPUT;
 	}
-
-	@Action("index")
-	public String index() {
-		return INPUT;
-	}
-
-	@Action("login")
-	public void login() {
-
-	}
-
-	@Action("logout")
-	public void logout() {
-
-	}
 }

@@ -8,7 +8,6 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <s:head />
 </head>
-<body>
-hello world
+<body>hello world
 </body>
 </html>

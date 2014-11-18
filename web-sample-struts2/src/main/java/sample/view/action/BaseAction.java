@@ -9,6 +9,8 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.util.ServletContextAware;
 
+import sample.core.info.UserInfo;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 public class BaseAction extends ActionSupport implements ServletRequestAware,
@@ -26,7 +28,7 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 		return servletContext;
 	}
 
-	public void setServletContext(ServletContext servletContext) {		
+	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
 	}
 
@@ -48,5 +50,9 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 
 	public HttpSession getSession() {
 		return servletRequest.getSession();
+	}
+
+	public UserInfo getUserInfo() {
+		return null;
 	}
 }

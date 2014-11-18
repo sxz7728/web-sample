@@ -18,6 +18,7 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
+				<value>classpath:application.properties</value>
 				<value>classpath:jdbc.properties</value>
 			</list>
 		</property>
@@ -61,4 +62,8 @@
 	</bean>
 
 	<tx:annotation-driven />
+
+	<bean class="sample.core.utils.Properties">
+		<property name="DEV_MODE" value="${application.devMode}" />
+	</bean>
 </beans>

@@ -20,6 +20,7 @@ import sample.core.info.UserInfo;
 import sample.core.model.SysDict;
 import sample.core.service.SystemService;
 import sample.core.utils.DictUtils;
+import sample.core.utils.JsonResult;
 import sample.core.utils.Properties;
 import sample.core.utils.QueryBuilder;
 import sample.core.utils.QueryUtils;
@@ -113,10 +114,37 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 		PrintWriter writer = null;
 
 		try {
+			JsonResult jsonResult = new JsonResult();
+			jsonResult.setSuccess(true);
+			jsonResult.setData(object);
+
 			Gson gson = new Gson();
 			servletResponse.setContentType("text/html;charset=utf-8");
 			writer = servletResponse.getWriter();
-			writer.println(gson.toJson(object));
+			writer.println(gson.toJson(jsonResult));
+			writer.flush();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		} finally {
+			IOUtils.closeQuietly(writer);
+		}
+	}
+
+	public void writeJson(Exception error) {
+		PrintWriter writer = null;
+
+		try {
+			JsonResult jsonResult = new JsonResult();
+			jsonResult.setSuccess(false);
+
+			if (Properties.DEV_MODE) {
+				jsonResult.setError(error.getMessage());
+			}
+
+			Gson gson = new Gson();
+			servletResponse.setContentType("text/html;charset=utf-8");
+			writer = servletResponse.getWriter();
+			writer.println(gson.toJson(jsonResult));
 			writer.flush();
 		} catch (IOException e) {
 			throw new RuntimeException(e);

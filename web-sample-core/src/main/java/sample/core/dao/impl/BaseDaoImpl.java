@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import sample.core.dao.BaseDao;
+import sample.core.utils.Datagrid;
 import sample.core.utils.QueryBuilder;
 import sample.core.utils.Utilities;
 
@@ -96,8 +97,8 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Integer update(QueryBuilder qb) {
 		assert (qb.hasWhere());
-		String hql = Utilities.format(HQL_UPDATE, qb.getColumn(),
-				qb.getWhere());
+		String hql = Utilities
+				.format(HQL_UPDATE, qb.getColumn(), qb.getWhere());
 		Query query = setParams(getSession().createQuery(hql),
 				qb.getParamters());
 		return query.executeUpdate();
@@ -124,8 +125,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public List<T> find(QueryBuilder qb) {
-		String hql = Utilities.format(HQL_FIND, qb.getWhere(),
-				qb.getOrder());
+		String hql = Utilities.format(HQL_FIND, qb.getWhere(), qb.getOrder());
 		return hqlList(hql, qb.getParamters(), qb.getStart(), qb.getLength());
 	}
 
@@ -133,6 +133,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	public Integer count(QueryBuilder qb) {
 		String hql = Utilities.format(HQL_FIND, qb.getWhere());
 		return hqlUnique(hql, qb.getParamters());
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid<T> datagrid(QueryBuilder qb) {
+		return new Datagrid<T>(find(qb), count(qb));
 	}
 
 	@SuppressWarnings("unchecked")

@@ -11,6 +11,9 @@ public class Main extends BaseAction {
 	public String execute() {
 		return INPUT;
 	}
-	
-	
+
+	@Action("sidebar")
+	public void sidebar() {
+
+	}
 }

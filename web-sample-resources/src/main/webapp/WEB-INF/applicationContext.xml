@@ -66,4 +66,7 @@
 	<bean class="sample.core.utils.Properties">
 		<property name="DEV_MODE" value="${application.devMode}" />
 	</bean>
+
+	<bean class="sample.core.utils.DictUtils">
+	</bean>
 </beans>

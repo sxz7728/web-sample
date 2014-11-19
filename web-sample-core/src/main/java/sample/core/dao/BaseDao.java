@@ -2,6 +2,7 @@ package sample.core.dao;
 
 import java.util.List;
 
+import sample.core.utils.Datagrid;
 import sample.core.utils.QueryBuilder;
 
 public interface BaseDao<T> {
@@ -24,6 +25,8 @@ public interface BaseDao<T> {
 	public List<T> find(QueryBuilder qb);
 
 	public Integer count(QueryBuilder qb);
+
+	public Datagrid<T> datagrid(QueryBuilder qb);
 
 	public <U> List<U> hqlList(String hql, List<Object> params, int start,
 			int length);

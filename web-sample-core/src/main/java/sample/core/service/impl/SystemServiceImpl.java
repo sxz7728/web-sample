@@ -23,6 +23,7 @@ import sample.core.model.SysModule;
 import sample.core.model.SysRole;
 import sample.core.model.SysUser;
 import sample.core.service.SystemService;
+import sample.core.utils.Datagrid;
 import sample.core.utils.DictUtils;
 import sample.core.utils.QueryBuilder;
 import sample.core.utils.QueryUtils;
@@ -57,6 +58,16 @@ public class SystemServiceImpl implements SystemService {
 		return sysModuleDao.load(id);
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public List<SysModule> findModule(QueryBuilder qb) {
+		return sysModuleDao.find(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid<SysModule> datagridModule(QueryBuilder qb) {
+		return sysModuleDao.datagrid(qb);
+	}
+
 	@Transactional(propagation = Propagation.REQUIRED)
 	public SysModule saveModule(String name, Integer sequence, UserInfo userInfo) {
 		SysModule sysModule = new SysModule();
@@ -85,9 +96,19 @@ public class SystemServiceImpl implements SystemService {
 		return sysMenuDao.load(id);
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public List<SysMenu> findMenu(QueryBuilder qb) {
+		return sysMenuDao.find(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid<SysMenu> datagridMenu(QueryBuilder qb) {
+		return sysMenuDao.datagrid(qb);
+	}
+
 	@Transactional(propagation = Propagation.REQUIRED)
-	public SysMenu saveMenu(Integer moduleId, Integer parentId,
-			String name, String url, Integer sequence, UserInfo userInfo) {
+	public SysMenu saveMenu(Integer moduleId, Integer parentId, String name,
+			String url, Integer sequence, UserInfo userInfo) {
 		SysMenu sysMenu = new SysMenu();
 		sysMenu.setSysModule(sysModuleDao.load(moduleId));
 		sysMenu.setParentId(parentId);
@@ -101,8 +122,8 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public SysMenu updateMenu(Integer id, Integer parentId,
-			String name, String url, Integer sequence, UserInfo userInfo) {
+	public SysMenu updateMenu(Integer id, Integer parentId, String name,
+			String url, Integer sequence, UserInfo userInfo) {
 		SysMenu sysMenu = sysMenuDao.load(id);
 		sysMenu.setParentId(parentId);
 		sysMenu.setName(name);
@@ -117,6 +138,16 @@ public class SystemServiceImpl implements SystemService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public SysRole loadRole(Integer id) {
 		return sysRoleDao.load(id);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public List<SysRole> findRole(QueryBuilder qb) {
+		return sysRoleDao.find(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid<SysRole> datagridRole(QueryBuilder qb) {
+		return sysRoleDao.datagrid(qb);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -160,10 +191,30 @@ public class SystemServiceImpl implements SystemService {
 		return sysUserDao.load(id);
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public List<SysUser> findUser(QueryBuilder qb) {
+		return sysUserDao.find(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid<SysUser> datagridUser(QueryBuilder qb) {
+		return sysUserDao.datagrid(qb);
+	}
+
 	// Dict
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public SysDict loadDict(Integer id) {
 		return sysDictDao.load(id);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public List<SysDict> findDict(QueryBuilder qb) {
+		return sysDictDao.find(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid<SysDict> datagridDict(QueryBuilder qb) {
+		return sysDictDao.datagrid(qb);
 	}
 
 	// Area
@@ -172,9 +223,29 @@ public class SystemServiceImpl implements SystemService {
 		return sysAreaDao.load(id);
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public List<SysArea> findArea(QueryBuilder qb) {
+		return sysAreaDao.find(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid<SysArea> datagridArea(QueryBuilder qb) {
+		return sysAreaDao.datagrid(qb);
+	}
+
 	// File
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public SysFile loadFile(Integer id) {
 		return sysFileDao.load(id);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public List<SysFile> findFile(QueryBuilder qb) {
+		return sysFileDao.find(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid<SysFile> datagridFile(QueryBuilder qb) {
+		return sysFileDao.datagrid(qb);
 	}
 }

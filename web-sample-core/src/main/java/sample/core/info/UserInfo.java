@@ -14,8 +14,6 @@ public class UserInfo {
 
 	private String userType;
 	
-	private List<Integer> roleIds;
-
 	private List<Integer> moduleIds;
 
 	private List<Integer> menuIds;
@@ -48,14 +46,6 @@ public class UserInfo {
 
 	public void setUserType(String userType) {
 		this.userType = userType;
-	}
-
-	public List<Integer> getRoleIds() {
-		return roleIds;
-	}
-
-	public void setRoleIds(List<Integer> roleIds) {
-		this.roleIds = roleIds;
 	}
 
 	public List<Integer> getModuleIds() {

@@ -59,10 +59,10 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 		if (params != null) {
 			for (int i = 0; i < params.size(); ++i) {
 				if (params.get(i) instanceof Collection) {
-					query.setParameterList(String.valueOf(i),
+					query.setParameterList("p" + (i + 1),
 							(Collection<?>) params.get(i));
 				} else {
-					query.setParameter(String.valueOf(i), params.get(i));
+					query.setParameter("p" + (i + 1), params.get(i));
 				}
 			}
 		}

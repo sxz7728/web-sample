@@ -42,7 +42,7 @@ public class QueryBuilder {
 		}
 
 		paramters.add(param);
-		column.append(Utilities.format(str, ":" + paramters.size()));
+		column.append(Utilities.format(str, ":p" + paramters.size()));
 		return this;
 	}
 
@@ -54,12 +54,11 @@ public class QueryBuilder {
 
 			if (params[0] instanceof Collection) {
 				where.append(" ").append(
-						Utilities.format(str, "(:" + paramters.size() + ")"));
+						Utilities.format(str, "(:p" + paramters.size() + ")"));
 			} else {
 				where.append(" ").append(
-						Utilities.format(str, ":" + paramters.size()));
+						Utilities.format(str, ":p" + paramters.size()));
 			}
-
 		} else {
 			List<String> args = Lists.newArrayList();
 
@@ -67,9 +66,9 @@ public class QueryBuilder {
 				paramters.add(param);
 
 				if (params[0] instanceof Collection) {
-					args.add("(:" + paramters.size() + ")");
+					args.add("(:p" + paramters.size() + ")");
 				} else {
-					args.add(":" + paramters.size());
+					args.add(":p" + paramters.size());
 				}
 			}
 

@@ -9,7 +9,7 @@
 	<constant name="struts.custom.i18n.resources" value="ApplicationResources,errors" />
 	<constant name="struts.url.includeParams" value="none" />
 	<constant name="struts.i18n.encoding" value="UTF-8" />
-	<constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="false" />
 	<constant name="struts.convention.default.parent.package"
 		value="default" />
 	<constant name="struts.action.extension" value="," />
@@ -47,8 +47,7 @@
 		</interceptors>
 
 		<global-exception-mappings>
-			<exception-mapping result="error" exception="java.lang.Exception">
-			</exception-mapping>
+			<exception-mapping result="error" exception="java.lang.Exception" />
 		</global-exception-mappings>
 	</package>
 </struts>

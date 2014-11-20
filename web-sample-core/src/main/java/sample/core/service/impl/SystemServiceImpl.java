@@ -1,7 +1,9 @@
 package sample.core.service.impl;
 
+import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -256,7 +258,7 @@ public class SystemServiceImpl implements SystemService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public UserInfo login(String username, String password) {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
-		qb.addColumn("and t.username = {0}", username);
+		qb.addWhere("and t.username = {0}", username);
 
 		List<SysUser> sysUsers = sysUserDao.find(qb);
 
@@ -269,36 +271,34 @@ public class SystemServiceImpl implements SystemService {
 				userInfo.setUserName(sysUser.getUsername());
 				userInfo.setUserType(sysUser.getType());
 
-				List<SysRole> sysRoles = null;
+				List<SysMenu> sysMenus = null;
 
 				if (userInfo.isAdmin()) {
 					qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
-					sysRoles = sysRoleDao.find(qb);
+					sysMenus = sysMenuDao.find(qb);
 				} else {
-					sysRoles = sysUser.getSysRoles();
-				}
+					sysMenus = Lists.newArrayList();
 
-				List<Integer> roleIds = Lists.newArrayList();
-				List<Integer> moduleIds = Lists.newArrayList();
-				List<Integer> menuIds = Lists.newArrayList();
-
-				for (SysRole sysRole : sysRoles) {
-					roleIds.add(sysRole.getId());
-
-					for (SysMenu sysMenu : sysRole.getSysMenus()) {
-						if (!menuIds.contains(sysMenu.getId())) {
-							menuIds.add(sysMenu.getId());
-						}
-
-						SysModule sysModule = sysMenu.getSysModule();
-
-						if (!moduleIds.contains(sysModule.getId())) {
-							moduleIds.add(sysModule.getId());
-						}
+					for (SysRole sysRole : sysUser.getSysRoles()) {
+						CollectionUtils.union(sysMenus, sysRole.getSysMenus());
 					}
 				}
 
-				userInfo.setRoleIds(roleIds);
+				List<Integer> moduleIds = Lists.newArrayList();
+				List<Integer> menuIds = Lists.newArrayList();
+
+				for (SysMenu sysMenu : sysMenus) {
+					if (!menuIds.contains(sysMenu.getId())) {
+						menuIds.add(sysMenu.getId());
+					}
+
+					SysModule sysModule = sysMenu.getSysModule();
+
+					if (!moduleIds.contains(sysModule.getId())) {
+						moduleIds.add(sysModule.getId());
+					}
+				}
+
 				userInfo.setModuleIds(moduleIds);
 				userInfo.setMenuIds(menuIds);
 				return userInfo;

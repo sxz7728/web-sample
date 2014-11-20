@@ -29,7 +29,7 @@
 								</div>
 								<div class="checkbox">
 									<label> <input name="remember" type="checkbox"
-										value="true">Remember Me
+										value="true">记住我
 									</label>
 								</div>
 								<a href="index.html" class="btn btn-lg btn-success btn-block">登录</a>

@@ -18,6 +18,10 @@ public class Index extends BaseAction {
 
 	private String password;
 
+	public Index() {
+		super(false);
+	}
+
 	@Action("index")
 	public String execute() {
 		return INPUT;

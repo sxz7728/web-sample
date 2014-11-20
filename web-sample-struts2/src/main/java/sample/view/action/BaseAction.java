@@ -16,6 +16,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.util.ServletContextAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import sample.core.exception.AuthFailedException;
 import sample.core.info.UserInfo;
 import sample.core.model.SysDict;
 import sample.core.service.SystemService;
@@ -27,6 +28,7 @@ import sample.core.utils.QueryBuilder;
 import sample.core.utils.QueryUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.interceptor.annotations.Before;
 
 public class BaseAction extends ActionSupport implements ServletRequestAware,
 		ServletResponseAware, ServletContextAware {
@@ -34,6 +36,8 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 	private static final long serialVersionUID = 1L;
 
 	private static final String SESSION_USER_INFO = "user_info";
+
+	private final boolean needAuth;
 
 	private HttpServletRequest servletRequest;
 
@@ -51,6 +55,14 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 	private SystemService systemService;
 
 	private UserInfo userInfo;
+
+	public BaseAction() {
+		needAuth = true;
+	}
+
+	public BaseAction(boolean needAuth) {
+		this.needAuth = needAuth;
+	}
 
 	public ServletContext getServletContext() {
 		return servletContext;
@@ -80,15 +92,20 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 		return servletRequest.getSession();
 	}
 
-	public UserInfo getUserInfo() {
-		if (userInfo == null) {
+	@Before
+	public void authenticate() {
+		if (needAuth) {
 			userInfo = (UserInfo) getSession().getAttribute(SESSION_USER_INFO);
-		}
 
-		if (userInfo != null) {
+			if (userInfo == null) {
+				throw new AuthFailedException();
+			}
+
 			userInfo.setOperateDate(new Date());
 		}
+	}
 
+	public UserInfo getUserInfo() {
 		return userInfo;
 	}
 

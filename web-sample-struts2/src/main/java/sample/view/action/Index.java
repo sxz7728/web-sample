@@ -2,12 +2,19 @@ package sample.view.action;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import sample.core.info.UserInfo;
+import sample.core.service.SystemService;
 
 @Namespace("/")
 public class Index extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
-	private String userName;
+	@Autowired
+	private SystemService systemService;
+
+	private String username;
 
 	private String password;
 
@@ -18,19 +25,28 @@ public class Index extends BaseAction {
 
 	@Action("login")
 	public void login() {
+		UserInfo userInfo = systemService.login(username, password);
+
+		if (userInfo != null) {
+			setUserInfo(userInfo);
+			writeJson(true);
+		} else {
+			writeJson(false);
+		}
 	}
 
 	@Action("logout")
 	public void logout() {
-
+		setUserInfo(null);
+		writeJson(true);
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

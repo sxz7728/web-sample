@@ -1,6 +1,11 @@
 package sample.core.info;
 
 import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+
+import sample.core.utils.DictUtils;
 
 public class UserInfo {
 	private Integer userId;
@@ -8,8 +13,18 @@ public class UserInfo {
 	private String userName;
 
 	private String userType;
+	
+	private List<Integer> roleIds;
+
+	private List<Integer> moduleIds;
+
+	private List<Integer> menuIds;
 
 	private Date operateDate;
+
+	public boolean isAdmin() {
+		return StringUtils.equals(userType, DictUtils.USER_TYPE_ADMIN);
+	}
 
 	public Integer getUserId() {
 		return userId;
@@ -33,6 +48,30 @@ public class UserInfo {
 
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+
+	public List<Integer> getRoleIds() {
+		return roleIds;
+	}
+
+	public void setRoleIds(List<Integer> roleIds) {
+		this.roleIds = roleIds;
+	}
+
+	public List<Integer> getModuleIds() {
+		return moduleIds;
+	}
+
+	public void setModuleIds(List<Integer> moduleIds) {
+		this.moduleIds = moduleIds;
+	}
+
+	public List<Integer> getMenuIds() {
+		return menuIds;
+	}
+
+	public void setMenuIds(List<Integer> menuIds) {
+		this.menuIds = menuIds;
 	}
 
 	public Date getOperateDate() {

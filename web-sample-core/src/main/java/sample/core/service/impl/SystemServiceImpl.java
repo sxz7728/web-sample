@@ -2,10 +2,13 @@ package sample.core.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.google.common.collect.Lists;
 
 import sample.core.dao.SysAreaDao;
 import sample.core.dao.SysDictDao;
@@ -252,6 +255,56 @@ public class SystemServiceImpl implements SystemService {
 	// other
 	@Transactional(propagation = Propagation.REQUIRED)
 	public UserInfo login(String username, String password) {
+		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
+		qb.addColumn("and t.username = {0}", username);
+
+		List<SysUser> sysUsers = sysUserDao.find(qb);
+
+		if (sysUsers.size() == 1) {
+			SysUser sysUser = sysUsers.get(0);
+
+			if (StringUtils.equals(password, sysUser.getPassword())) {
+				UserInfo userInfo = new UserInfo();
+				userInfo.setUserId(sysUser.getId());
+				userInfo.setUserName(sysUser.getUsername());
+				userInfo.setUserType(sysUser.getType());
+
+				List<SysRole> sysRoles = null;
+
+				if (userInfo.isAdmin()) {
+					qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
+					sysRoles = sysRoleDao.find(qb);
+				} else {
+					sysRoles = sysUser.getSysRoles();
+				}
+
+				List<Integer> roleIds = Lists.newArrayList();
+				List<Integer> moduleIds = Lists.newArrayList();
+				List<Integer> menuIds = Lists.newArrayList();
+
+				for (SysRole sysRole : sysRoles) {
+					roleIds.add(sysRole.getId());
+
+					for (SysMenu sysMenu : sysRole.getSysMenus()) {
+						if (!menuIds.contains(sysMenu.getId())) {
+							menuIds.add(sysMenu.getId());
+						}
+
+						SysModule sysModule = sysMenu.getSysModule();
+
+						if (!moduleIds.contains(sysModule.getId())) {
+							moduleIds.add(sysModule.getId());
+						}
+					}
+				}
+
+				userInfo.setRoleIds(roleIds);
+				userInfo.setModuleIds(moduleIds);
+				userInfo.setMenuIds(menuIds);
+				return userInfo;
+			}
+		}
+
 		return null;
 	}
 }

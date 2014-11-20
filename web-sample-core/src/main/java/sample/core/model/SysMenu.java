@@ -3,8 +3,11 @@ package sample.core.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +22,7 @@ import javax.persistence.TemporalType;
 public class SysMenu {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Access(AccessType.PROPERTY)
 	private Integer id;
 
 	@Column(name = "parent_id")
@@ -30,7 +34,7 @@ public class SysMenu {
 
 	private Integer sequence;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private SysModule sysModule;
 
 	@ManyToMany(mappedBy = "sysMenus")

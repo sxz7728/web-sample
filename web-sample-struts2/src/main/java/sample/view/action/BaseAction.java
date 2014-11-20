@@ -110,14 +110,10 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 		return systemService.findDict(qb);
 	}
 
-	public void writeJson(Object object) {
+	public void writeJson(JsonResult result) {
 		PrintWriter writer = null;
 
 		try {
-			JsonResult result = new JsonResult();
-			result.setSuccess(true);
-			result.setData(object);
-
 			servletResponse.setContentType("text/html;charset=utf-8");
 			writer = servletResponse.getWriter();
 			writer.println(JsonUtils.toJson(result));
@@ -129,25 +125,21 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 		}
 	}
 
+	public void writeJson(Object data) {
+		JsonResult result = new JsonResult();
+		result.setSuccess(true);
+		result.setData(data);
+		writeJson(result);
+	}
+
 	public void writeJson(Exception error) {
-		PrintWriter writer = null;
+		JsonResult result = new JsonResult();
+		result.setSuccess(false);
 
-		try {
-			JsonResult result = new JsonResult();
-			result.setSuccess(false);
-
-			if (Properties.DEV_MODE) {
-				result.setError(error.getMessage());
-			}
-
-			servletResponse.setContentType("text/html;charset=utf-8");
-			writer = servletResponse.getWriter();
-			writer.println(JsonUtils.toJson(result));
-			writer.flush();
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} finally {
-			IOUtils.closeQuietly(writer);
+		if (Properties.DEV_MODE) {
+			result.setError(error.getMessage());
 		}
+
+		writeJson(result);
 	}
 }

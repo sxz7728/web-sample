@@ -21,11 +21,11 @@ import sample.core.model.SysDict;
 import sample.core.service.SystemService;
 import sample.core.utils.DictUtils;
 import sample.core.utils.JsonResult;
+import sample.core.utils.JsonUtils;
 import sample.core.utils.Properties;
 import sample.core.utils.QueryBuilder;
 import sample.core.utils.QueryUtils;
 
-import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class BaseAction extends ActionSupport implements ServletRequestAware,
@@ -106,7 +106,7 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 
 	public List<SysDict> findDict(String dictType) {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
-		qb.addWhere("and t.dictType", dictType);
+		qb.addWhere("and t.dictType = {0}", dictType);
 		return systemService.findDict(qb);
 	}
 
@@ -114,14 +114,13 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 		PrintWriter writer = null;
 
 		try {
-			JsonResult jsonResult = new JsonResult();
-			jsonResult.setSuccess(true);
-			jsonResult.setData(object);
+			JsonResult result = new JsonResult();
+			result.setSuccess(true);
+			result.setData(object);
 
-			Gson gson = new Gson();
 			servletResponse.setContentType("text/html;charset=utf-8");
 			writer = servletResponse.getWriter();
-			writer.println(gson.toJson(jsonResult));
+			writer.println(JsonUtils.toJson(result));
 			writer.flush();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -134,17 +133,16 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 		PrintWriter writer = null;
 
 		try {
-			JsonResult jsonResult = new JsonResult();
-			jsonResult.setSuccess(false);
+			JsonResult result = new JsonResult();
+			result.setSuccess(false);
 
 			if (Properties.DEV_MODE) {
-				jsonResult.setError(error.getMessage());
+				result.setError(error.getMessage());
 			}
 
-			Gson gson = new Gson();
 			servletResponse.setContentType("text/html;charset=utf-8");
 			writer = servletResponse.getWriter();
-			writer.println(gson.toJson(jsonResult));
+			writer.println(JsonUtils.toJson(result));
 			writer.flush();
 		} catch (IOException e) {
 			throw new RuntimeException(e);

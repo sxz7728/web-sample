@@ -79,4 +79,7 @@ public interface SystemService {
 	public List<SysFile> findFile(QueryBuilder qb);
 
 	public Datagrid<SysFile> datagridFile(QueryBuilder qb);
+
+	// other
+	public UserInfo login(String username, String password);
 }

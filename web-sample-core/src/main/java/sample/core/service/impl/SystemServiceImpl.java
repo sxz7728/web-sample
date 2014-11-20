@@ -248,4 +248,10 @@ public class SystemServiceImpl implements SystemService {
 	public Datagrid<SysFile> datagridFile(QueryBuilder qb) {
 		return sysFileDao.datagrid(qb);
 	}
+
+	// other
+	@Transactional(propagation = Propagation.REQUIRED)
+	public UserInfo login(String username, String password) {
+		return null;
+	}
 }

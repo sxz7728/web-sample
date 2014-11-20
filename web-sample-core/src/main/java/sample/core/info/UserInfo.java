@@ -7,6 +7,8 @@ public class UserInfo {
 
 	private String userName;
 
+	private String userType;
+
 	private Date operateDate;
 
 	public Integer getUserId() {
@@ -23,6 +25,14 @@ public class UserInfo {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 	public Date getOperateDate() {

@@ -14,7 +14,7 @@
 			<groupId>web-sample</groupId>
 			<artifactId>web-sample-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>web-sample</groupId>

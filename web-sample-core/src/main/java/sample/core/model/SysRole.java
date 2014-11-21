@@ -26,7 +26,7 @@ public class SysRole {
 	private Integer id;
 
 	private String name;
-	
+
 	private Integer sequence;
 
 	@ManyToMany
@@ -61,7 +61,7 @@ public class SysRole {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public Integer getSequence() {
 		return sequence;
 	}

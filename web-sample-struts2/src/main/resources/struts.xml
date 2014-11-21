@@ -35,6 +35,7 @@
 					<param name="excludeParams">^action:.*,^method:.*</param>
 				</interceptor-ref>
 				<interceptor-ref name="conversionError" />
+				<interceptor-ref name="annotationWorkflow" />
 				<interceptor-ref name="validation">
 					<param name="includeMethods">save</param>
 				</interceptor-ref>

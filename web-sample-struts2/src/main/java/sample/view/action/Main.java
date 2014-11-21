@@ -10,6 +10,7 @@ import sample.core.model.SysModule;
 import sample.core.service.SystemService;
 import sample.core.utils.QueryBuilder;
 import sample.core.utils.QueryUtils;
+import sample.core.utils.Utilities;
 
 @Namespace("/")
 public class Main extends BaseAction {
@@ -25,7 +26,8 @@ public class Main extends BaseAction {
 	@Action("main")
 	public String execute() {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
-		qb.addWhere("and t.id in {0}", getUserInfo().getModuleIds());
+		QueryUtils.addWhereIfEmpty(qb, "and t.id in {0}", getUserInfo()
+				.getModuleIds(), -1);
 		qb.addOrder("sequence");
 		sysModules = systemService.findModule(qb);
 		return INPUT;
@@ -35,7 +37,8 @@ public class Main extends BaseAction {
 	public void sidebar() {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
 		qb.addWhere("and t.sysModule.id = {0}", menuId);
-		qb.addWhere("and t.id in {0}", getUserInfo().getMenuIds());
+		QueryUtils.addWhereIfEmpty(qb, "and t.id in {0}", getUserInfo()
+				.getMenuIds(), -1);
 		qb.addOrder("sequence");
 		writeJson(systemService.findMenu(qb));
 	}

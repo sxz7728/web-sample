@@ -16,6 +16,8 @@
 
 	<package name="default" extends="struts-default">
 		<interceptors>
+			<interceptor name="customInterceptor" class="sample.view.utils.CustomInterceptor"></interceptor>
+
 			<interceptor-stack name="defaultStack">
 				<!-- <interceptor-ref name="exception" /> -->
 				<interceptor-ref name="alias" />
@@ -35,7 +37,7 @@
 					<param name="excludeParams">^action:.*,^method:.*</param>
 				</interceptor-ref>
 				<interceptor-ref name="conversionError" />
-				<interceptor-ref name="annotationWorkflow" />
+				<interceptor-ref name="customInterceptor" />
 				<interceptor-ref name="validation">
 					<param name="includeMethods">save</param>
 				</interceptor-ref>

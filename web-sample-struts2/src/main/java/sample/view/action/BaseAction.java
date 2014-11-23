@@ -28,7 +28,6 @@ import sample.core.utils.QueryBuilder;
 import sample.core.utils.QueryUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.interceptor.annotations.Before;
 
 public class BaseAction extends ActionSupport implements ServletRequestAware,
 		ServletResponseAware, ServletContextAware {
@@ -92,13 +91,12 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 		return servletRequest.getSession();
 	}
 
-	@Before
 	public void authenticate() {
 		if (needAuth) {
 			userInfo = (UserInfo) getSession().getAttribute(SESSION_USER_INFO);
 
 			if (userInfo == null) {
-				throw new AuthFailedException();
+				throw new AuthFailedException("not logged in.");
 			}
 
 			userInfo.setOperateDate(new Date());
@@ -106,6 +104,11 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 	}
 
 	public UserInfo getUserInfo() {
+		if (userInfo == null) {
+			userInfo = (UserInfo) getSession().getAttribute(SESSION_USER_INFO);
+			userInfo.setOperateDate(new Date());
+		}
+
 		return userInfo;
 	}
 

@@ -131,18 +131,29 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public Integer count(QueryBuilder qb) {
-		String hql = Utilities.format(HQL_FIND, qb.getWhere());
+		String hql = Utilities.format(HQL_COUNT, qb.getWhere());
 		return hqlUnique(hql, qb.getParamters());
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public Datagrid<T> datagrid(QueryBuilder qb) {
-		return new Datagrid<T>(find(qb), count(qb));
+	protected Datagrid datagrid(String hqlFind, String hqlCount, QueryBuilder qb) {
+		Datagrid result = new Datagrid();
+
+		String hql = Utilities.format(hqlFind, qb.getWhere(), qb.getOrder());
+		result.setData(hqlListMap(hql, qb.getParamters(), qb.getStart(),
+				qb.getLength()));
+
+		if (qb.getLength() > 0) {
+			hql = Utilities.format(hqlCount, qb.getWhere());
+			result.setCount(this.<Integer> hqlUnique(hql, qb.getParamters()));
+		}
+
+		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public <U> List<U> hqlList(String hql, List<Object> params, int start,
+	public List<T> hqlList(String hql, List<Object> params, int start,
 			int length) {
 		Query query = setParams(getSession().createQuery(hql), params);
 
@@ -154,21 +165,48 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 			query.setMaxResults(length);
 		}
 
-		Class<U> entityClass = (Class<U>) ((ParameterizedType) getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[0];
-
-		if (Map.class.isAssignableFrom(entityClass)) {
-			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-		} else if (!entityClass.equals(modelClass)) {
-			query.setResultTransformer(Transformers.aliasToBean(entityClass));
-		}
-
 		return query.list();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public <U> List<U> sqlList(String sql, List<Object> params, int start,
+	public List<Map<String, ?>> hqlListMap(String hql, List<Object> params,
+			int start, int length) {
+		Query query = setParams(getSession().createQuery(hql), params);
+
+		if (start > 0) {
+			query.setFirstResult(start);
+		}
+
+		if (length > 0) {
+			query.setMaxResults(length);
+		}
+
+		return query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP)
+				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public <U> List<U> hqlListBean(Class<U> clazz, String hql,
+			List<Object> params, int start, int length) {
+		Query query = setParams(getSession().createQuery(hql), params);
+
+		if (start > 0) {
+			query.setFirstResult(start);
+		}
+
+		if (length > 0) {
+			query.setMaxResults(length);
+		}
+
+		return query.setResultTransformer(Transformers.aliasToBean(clazz))
+				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public List<T> sqlList(String sql, List<Object> params, int start,
 			int length) {
 		Query query = setParams(getSession().createSQLQuery(sql), params);
 
@@ -180,16 +218,43 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 			query.setMaxResults(length);
 		}
 
-		Class<U> entityClass = (Class<U>) ((ParameterizedType) getClass()
-				.getGenericSuperclass()).getActualTypeArguments()[0];
+		return query.list();
+	}
 
-		if (Map.class.isAssignableFrom(entityClass)) {
-			query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
-		} else {
-			query.setResultTransformer(Transformers.aliasToBean(entityClass));
+	@SuppressWarnings("unchecked")
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public List<Map<String, ?>> sqlListMap(String sql, List<Object> params,
+			int start, int length) {
+		Query query = setParams(getSession().createSQLQuery(sql), params);
+
+		if (start > 0) {
+			query.setFirstResult(start);
 		}
 
-		return query.list();
+		if (length > 0) {
+			query.setMaxResults(length);
+		}
+
+		return query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP)
+				.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public <U> List<U> sqlListBean(Class<U> clazz, String hql,
+			List<Object> params, int start, int length) {
+		Query query = setParams(getSession().createSQLQuery(hql), params);
+
+		if (start > 0) {
+			query.setFirstResult(start);
+		}
+
+		if (length > 0) {
+			query.setMaxResults(length);
+		}
+
+		return query.setResultTransformer(Transformers.aliasToBean(clazz))
+				.list();
 	}
 
 	@SuppressWarnings("unchecked")

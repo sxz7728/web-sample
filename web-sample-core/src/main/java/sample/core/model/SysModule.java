@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "sys_module")
 public class SysModule {
@@ -28,6 +30,7 @@ public class SysModule {
 	private Integer sequence;
 
 	@OneToMany(mappedBy = "sysModule")
+	@Expose(serialize = false, deserialize = false)
 	private List<SysMenu> sysMenus;
 
 	@Column(name = "deleted")

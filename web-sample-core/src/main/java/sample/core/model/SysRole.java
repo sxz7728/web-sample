@@ -17,6 +17,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "sys_role")
 public class SysRole {
@@ -31,9 +33,11 @@ public class SysRole {
 
 	@ManyToMany
 	@JoinTable(name = "sys_role_menu", joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = { @JoinColumn(name = "menu_id") })
+	@Expose(serialize = false, deserialize = false)
 	private List<SysMenu> sysMenus;
 
 	@ManyToMany(mappedBy = "sysRoles")
+	@Expose(serialize = false, deserialize = false)
 	private List<SysUser> sysUsers;
 
 	@Column(name = "deleted")

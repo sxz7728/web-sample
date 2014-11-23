@@ -19,7 +19,9 @@ public interface SystemService {
 
 	public List<SysModule> findModule(QueryBuilder qb);
 
-	public Datagrid<SysModule> datagridModule(QueryBuilder qb);
+	public Integer countModule(QueryBuilder qb);
+
+	public Datagrid datagridModule(QueryBuilder qb);
 
 	public SysModule saveModule(String name, Integer sequence, UserInfo userInfo);
 
@@ -31,7 +33,9 @@ public interface SystemService {
 
 	public List<SysMenu> findMenu(QueryBuilder qb);
 
-	public Datagrid<SysMenu> datagridMenu(QueryBuilder qb);
+	public Integer countMenu(QueryBuilder qb);
+
+	public Datagrid datagridMenu(QueryBuilder qb);
 
 	public SysMenu saveMenu(Integer moduleId, Integer parentId, String name,
 			String url, Integer sequence, UserInfo userInfo);
@@ -44,7 +48,9 @@ public interface SystemService {
 
 	public List<SysRole> findRole(QueryBuilder qb);
 
-	public Datagrid<SysRole> datagridRole(QueryBuilder qb);
+	public Integer countRole(QueryBuilder qb);
+
+	public Datagrid datagridRole(QueryBuilder qb);
 
 	public SysRole saveRole(String name, Integer sequence,
 			List<Integer> menuIds, UserInfo userInfo);
@@ -57,28 +63,36 @@ public interface SystemService {
 
 	public List<SysUser> findUser(QueryBuilder qb);
 
-	public Datagrid<SysUser> datagridUser(QueryBuilder qb);
+	public Integer countUser(QueryBuilder qb);
+
+	public Datagrid datagridUser(QueryBuilder qb);
 
 	// Dict
 	public SysDict loadDict(Integer id);
 
 	public List<SysDict> findDict(QueryBuilder qb);
 
-	public Datagrid<SysDict> datagridDict(QueryBuilder qb);
+	public Integer countDict(QueryBuilder qb);
+
+	public Datagrid datagridDict(QueryBuilder qb);
 
 	// Area
 	public SysArea loadArea(Integer id);
 
 	public List<SysArea> findArea(QueryBuilder qb);
 
-	public Datagrid<SysArea> datagridArea(QueryBuilder qb);
+	public Integer countArea(QueryBuilder qb);
+
+	public Datagrid datagridArea(QueryBuilder qb);
 
 	// File
 	public SysFile loadFile(Integer id);
 
 	public List<SysFile> findFile(QueryBuilder qb);
 
-	public Datagrid<SysFile> datagridFile(QueryBuilder qb);
+	public Integer countFile(QueryBuilder qb);
+
+	public Datagrid datagridFile(QueryBuilder qb);
 
 	// other
 	public UserInfo login(String username, String password);

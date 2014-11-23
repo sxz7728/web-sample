@@ -96,7 +96,7 @@ public class QueryBuilder {
 	public String getWhere() {
 		return where.toString();
 	}
-
+	
 	public boolean hasWhere() {
 		return where.length() > 0;
 	}

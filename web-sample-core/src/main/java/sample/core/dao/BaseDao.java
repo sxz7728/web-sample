@@ -1,6 +1,7 @@
 package sample.core.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import sample.core.utils.Datagrid;
 import sample.core.utils.QueryBuilder;
@@ -26,13 +27,25 @@ public interface BaseDao<T> {
 
 	public Integer count(QueryBuilder qb);
 
-	public Datagrid<T> datagrid(QueryBuilder qb);
+	public Datagrid datagrid(QueryBuilder qb);
 
-	public <U> List<U> hqlList(String hql, List<Object> params, int start,
+	public List<T> hqlList(String hql, List<Object> params, int start,
 			int length);
 
-	public <U> List<U> sqlList(String sql, List<Object> params, int start,
+	public List<Map<String, ?>> hqlListMap(String hql, List<Object> params,
+			int start, int length);
+
+	public <U> List<U> hqlListBean(Class<U> clazz, String hql,
+			List<Object> params, int start, int length);
+
+	public List<T> sqlList(String sql, List<Object> params, int start,
 			int length);
+
+	public List<Map<String, ?>> sqlListMap(String hql, List<Object> params,
+			int start, int length);
+
+	public <U> List<U> sqlListBean(Class<U> clazz, String hql,
+			List<Object> params, int start, int length);
 
 	public <U> U hqlUnique(String hql, List<Object> params);
 

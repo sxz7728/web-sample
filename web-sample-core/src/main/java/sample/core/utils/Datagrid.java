@@ -1,22 +1,18 @@
 package sample.core.utils;
 
 import java.util.List;
+import java.util.Map;
 
-public class Datagrid<T> {
-	private List<T> data;
+public class Datagrid {
+	private List<Map<String, ?>> data;
 
 	private Integer count;
 
-	public Datagrid(List<T> data, Integer count) {
-		this.data = data;
-		this.count = count;
-	}
-
-	public List<T> getData() {
+	public List<Map<String, ?>> getData() {
 		return data;
 	}
 
-	public void setData(List<T> data) {
+	public void setData(List<Map<String, ?>> data) {
 		this.data = data;
 	}
 
@@ -27,5 +23,4 @@ public class Datagrid<T> {
 	public void setCount(Integer count) {
 		this.count = count;
 	}
-
 }

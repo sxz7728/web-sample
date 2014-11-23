@@ -68,7 +68,12 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public Datagrid<SysModule> datagridModule(QueryBuilder qb) {
+	public Integer countModule(QueryBuilder qb) {
+		return sysModuleDao.count(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid datagridModule(QueryBuilder qb) {
 		return sysModuleDao.datagrid(qb);
 	}
 
@@ -106,7 +111,12 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public Datagrid<SysMenu> datagridMenu(QueryBuilder qb) {
+	public Integer countMenu(QueryBuilder qb) {
+		return sysMenuDao.count(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid datagridMenu(QueryBuilder qb) {
 		return sysMenuDao.datagrid(qb);
 	}
 
@@ -150,7 +160,12 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public Datagrid<SysRole> datagridRole(QueryBuilder qb) {
+	public Integer countRole(QueryBuilder qb) {
+		return sysRoleDao.count(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid datagridRole(QueryBuilder qb) {
 		return sysRoleDao.datagrid(qb);
 	}
 
@@ -201,7 +216,12 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public Datagrid<SysUser> datagridUser(QueryBuilder qb) {
+	public Integer countUser(QueryBuilder qb) {
+		return sysUserDao.count(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid datagridUser(QueryBuilder qb) {
 		return sysUserDao.datagrid(qb);
 	}
 
@@ -217,7 +237,12 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public Datagrid<SysDict> datagridDict(QueryBuilder qb) {
+	public Integer countDict(QueryBuilder qb) {
+		return sysDictDao.count(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid datagridDict(QueryBuilder qb) {
 		return sysDictDao.datagrid(qb);
 	}
 
@@ -233,7 +258,12 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public Datagrid<SysArea> datagridArea(QueryBuilder qb) {
+	public Integer countArea(QueryBuilder qb) {
+		return sysAreaDao.count(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid datagridArea(QueryBuilder qb) {
 		return sysAreaDao.datagrid(qb);
 	}
 
@@ -249,7 +279,12 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public Datagrid<SysFile> datagridFile(QueryBuilder qb) {
+	public Integer countFile(QueryBuilder qb) {
+		return sysFileDao.count(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid datagridFile(QueryBuilder qb) {
 		return sysFileDao.datagrid(qb);
 	}
 
@@ -288,14 +323,16 @@ public class SystemServiceImpl implements SystemService {
 				List<Integer> menuIds = Lists.newArrayList();
 
 				for (SysMenu sysMenu : sysMenus) {
-					if (!menuIds.contains(sysMenu.getId())) {
-						menuIds.add(sysMenu.getId());
-					}
+					if (!Utilities.getYesNo(sysMenu.getDeleted())) {
+						if (!menuIds.contains(sysMenu.getId())) {
+							menuIds.add(sysMenu.getId());
+						}
 
-					SysModule sysModule = sysMenu.getSysModule();
+						SysModule sysModule = sysMenu.getSysModule();
 
-					if (!moduleIds.contains(sysModule.getId())) {
-						moduleIds.add(sysModule.getId());
+						if (!moduleIds.contains(sysModule.getId())) {
+							moduleIds.add(sysModule.getId());
+						}
 					}
 				}
 

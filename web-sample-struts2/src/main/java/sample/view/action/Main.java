@@ -10,7 +10,6 @@ import sample.core.model.SysModule;
 import sample.core.service.SystemService;
 import sample.core.utils.QueryBuilder;
 import sample.core.utils.QueryUtils;
-import sample.core.utils.Utilities;
 
 @Namespace("/")
 public class Main extends BaseAction {
@@ -21,7 +20,7 @@ public class Main extends BaseAction {
 
 	private List<SysModule> sysModules;
 
-	private Integer menuId;
+	private Integer moduleId;
 
 	@Action("main")
 	public String execute() {
@@ -36,7 +35,7 @@ public class Main extends BaseAction {
 	@Action("sidebar")
 	public void sidebar() {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
-		qb.addWhere("and t.sysModule.id = {0}", menuId);
+		qb.addWhere("and t.sysModule.id = {0}", moduleId);
 		QueryUtils.addWhereIfEmpty(qb, "and t.id in {0}", getUserInfo()
 				.getMenuIds(), -1);
 		qb.addOrder("sequence");
@@ -51,11 +50,11 @@ public class Main extends BaseAction {
 		this.sysModules = sysModules;
 	}
 
-	public Integer getMenuId() {
-		return menuId;
+	public Integer getModuleId() {
+		return moduleId;
 	}
 
-	public void setMenuId(Integer menuId) {
-		this.menuId = menuId;
+	public void setModuleId(Integer moduleId) {
+		this.moduleId = moduleId;
 	}
 }

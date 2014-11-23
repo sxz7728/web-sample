@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "sys_menu")
 public class SysMenu {
@@ -37,9 +39,11 @@ public class SysMenu {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "module_id")
+	@Expose(serialize = false, deserialize = false)
 	private SysModule sysModule;
 
 	@ManyToMany(mappedBy = "sysMenus")
+	@Expose(serialize = false, deserialize = false)
 	private List<SysRole> sysRoles;
 
 	@Column(name = "deleted")

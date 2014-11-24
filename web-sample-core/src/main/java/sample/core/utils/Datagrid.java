@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 public class Datagrid {
-	private List<Map<String, ?>> data;
+	private List<Map<String, ?>> rows;
 
 	private Integer count;
-
-	public List<Map<String, ?>> getData() {
-		return data;
+	
+	public List<Map<String, ?>> getRows() {
+		return rows;
 	}
 
-	public void setData(List<Map<String, ?>> data) {
-		this.data = data;
+	public void setRows(List<Map<String, ?>> rows) {
+		this.rows = rows;
 	}
 
 	public Integer getCount() {

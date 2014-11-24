@@ -29,25 +29,19 @@ public interface BaseDao<T> {
 
 	public Datagrid datagrid(QueryBuilder qb);
 
-	public List<T> hqlList(String hql, List<Object> params, int start,
-			int length);
+	public List<T> hqlList(String hql, QueryBuilder qb);
 
-	public List<Map<String, ?>> hqlListMap(String hql, List<Object> params,
-			int start, int length);
+	public List<Map<String, ?>> hqlListMap(String hql, QueryBuilder qb);
 
-	public <U> List<U> hqlListBean(Class<U> clazz, String hql,
-			List<Object> params, int start, int length);
+	public <U> List<U> hqlListBean(Class<U> clazz, String hql, QueryBuilder qb);
 
-	public List<T> sqlList(String sql, List<Object> params, int start,
-			int length);
+	public <U> U hqlUnique(String hql, QueryBuilder qb);
 
-	public List<Map<String, ?>> sqlListMap(String hql, List<Object> params,
-			int start, int length);
+	public List<T> sqlList(String sql, QueryBuilder qb);
 
-	public <U> List<U> sqlListBean(Class<U> clazz, String hql,
-			List<Object> params, int start, int length);
+	public List<Map<String, ?>> sqlListMap(String sql, QueryBuilder qb);
 
-	public <U> U hqlUnique(String hql, List<Object> params);
+	public <U> List<U> sqlListBean(Class<U> clazz, String sql, QueryBuilder qb);
 
-	public <U> U sqlUnique(String sql, List<Object> params);
+	public <U> U sqlUnique(String sql, QueryBuilder qb);
 }

@@ -16,10 +16,10 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.util.ServletContextAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import sample.core.exception.AuthFailedException;
 import sample.core.info.UserInfo;
 import sample.core.model.SysDict;
 import sample.core.service.SystemService;
+import sample.core.utils.AuthFailedException;
 import sample.core.utils.DictUtils;
 import sample.core.utils.JsonResult;
 import sample.core.utils.JsonUtils;

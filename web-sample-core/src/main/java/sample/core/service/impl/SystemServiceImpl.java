@@ -288,7 +288,7 @@ public class SystemServiceImpl implements SystemService {
 		return sysFileDao.datagrid(qb);
 	}
 
-	// other
+	// Other
 	@Transactional(propagation = Propagation.REQUIRED)
 	public UserInfo login(String username, String password) {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());

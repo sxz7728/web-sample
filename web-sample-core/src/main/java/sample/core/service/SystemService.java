@@ -94,6 +94,6 @@ public interface SystemService {
 
 	public Datagrid datagridFile(QueryBuilder qb);
 
-	// other
+	// Other
 	public UserInfo login(String username, String password);
 }

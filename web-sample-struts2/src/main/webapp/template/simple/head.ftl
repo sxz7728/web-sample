@@ -29,13 +29,13 @@
 <script src="${base}/js/sb-admin-2.js"></script>
 <script src="${base}/js/doT.min.js"></script>
 
-<script src="${base}/js/utilities.js"></script>
+<script src="${base}/js/utils.js"></script>
 
 </#if>
 
 <script type="text/javascript">
 var globals = {
 	APP_NAME : '${base}',
-	DEV_MODE : ${properties.DEV_MODE}
+	DEV_MODE : ${properties.DEV_MODE?string}
 };
 </script>

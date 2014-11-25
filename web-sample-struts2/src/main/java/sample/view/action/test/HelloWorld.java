@@ -8,6 +8,10 @@ import sample.view.action.BaseAction;
 public class HelloWorld extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
+	public HelloWorld() {
+		super(false);
+	}
+
 	public String execute() {
 		return INPUT;
 	}

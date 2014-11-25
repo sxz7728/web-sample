@@ -1,4 +1,8 @@
-$.utilities = {
+$.extend({
+	utils : {}
+});
+
+$.extend($.utils, {
 	fullUrl : function(url) {
 		return url.charAt(0) == '/' ? globals.APP_NAME + url : url;
 	},
@@ -25,4 +29,4 @@ $.utilities = {
 			}
 		});
 	}
-};
+});

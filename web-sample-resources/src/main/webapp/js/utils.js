@@ -1,26 +1,18 @@
-$.extend({
-	utils : {}
-});
-
-$.extend($.utils, {
-	fullUrl : function(url) {
+(function($) {
+	$._fullUrl = function(url) {
 		return url.charAt(0) == '/' ? globals.APP_NAME + url : url;
-	},
+	};
 
-	ajax : function(s) {
-		s = jQuery.extend({
-			params : {}
-		}, s);
+	$._ajax = function(options) {
+		var opts = jQuery.extend({}, $.uAjax.defaults, options);
 
 		$.ajax({
 			type : "post",
-			url : fullUrl(s.url),
-			data : s.params,
+			url : $.uFullUrl(opts.url),
+			data : opts.params,
 			success : function(result) {
 				if (result.success) {
-					if (s.success) {
-						s.success(result);
-					}
+					opts.success(result);
 				} else {
 					if (result.error) {
 						alert(result.error);
@@ -28,5 +20,16 @@ $.extend($.utils, {
 				}
 			}
 		});
-	}
-});
+	};
+
+	$._ajax.defaults = {
+		params : {},
+		success : function() {
+		}
+	};
+
+	$.fn._ajaxSubmit = function(options) {
+
+	};
+
+})(jQuery);

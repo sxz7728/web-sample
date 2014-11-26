@@ -8,11 +8,11 @@
 	rel="stylesheet" type="text/css">
 
 <script src="${base}/js/jquery-1.11.1.js" type="text/javascript"></script>
+<script src="${base}/js/jquery.form.js" type="text/javascript"></script>
 <script src="${base}/js/bootstrap.js" type="text/javascript"></script>
-<script src="${base}/js/sb-admin-2.js"></script>
 <script src="${base}/js/doT.js"></script>
 
-<script src="${base}/js/utilities.js"></script>
+<script src="${base}/js/utils.js"></script>
 
 <#else>
 
@@ -25,8 +25,8 @@
 	rel="stylesheet" type="text/css">
 
 <script src="${base}/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="${base}/js/jquery.form.js" type="text/javascript"></script>
 <script src="${base}/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="${base}/js/sb-admin-2.js"></script>
 <script src="${base}/js/doT.min.js"></script>
 
 <script src="${base}/js/utils.js"></script>

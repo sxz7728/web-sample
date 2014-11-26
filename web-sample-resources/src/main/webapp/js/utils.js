@@ -3,6 +3,10 @@
 		return url.charAt(0) == '/' ? globals.APP_NAME + url : url;
 	};
 
+	$._notify = function(message) {
+
+	};
+
 	$._ajax = function(options) {
 		var opts = jQuery.extend({}, $.uAjax.defaults, options);
 
@@ -26,6 +30,15 @@
 		params : {},
 		success : function() {
 		}
+	};
+
+	$._autoHeight = function() {
+
+	};
+
+	$.fn._data = function() {
+		//var data = $(this).attr("_data");
+		//return data ? eval("({" + data + "})") : {};
 	};
 
 	$.fn._ajaxSubmit = function(options) {

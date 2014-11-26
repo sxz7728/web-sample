@@ -20,10 +20,6 @@
 			<param-name>singleSession</param-name>
 			<param-value>true</param-value>
 		</init-param>
-		<init-param>
-			<param-name>excludeSuffixs</param-name>
-			<param-value>js,css,jpg,jpeg,gif,png,bmp,pdf,doc,docx,xls,xlsx</param-value>
-		</init-param>
 	</filter>
 
 	<filter>
@@ -39,7 +35,7 @@
 		<filter-name>Struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
 	</filter>
-
+	
 	<filter-mapping>
 		<filter-name>OpenSession</filter-name>
 		<url-pattern>/*</url-pattern>

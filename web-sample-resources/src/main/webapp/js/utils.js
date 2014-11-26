@@ -37,8 +37,7 @@
 	};
 
 	$.fn._data = function() {
-		//var data = $(this).attr("_data");
-		//return data ? eval("({" + data + "})") : {};
+		return {};
 	};
 
 	$.fn._ajaxSubmit = function(options) {

@@ -8,11 +8,11 @@
 	};
 
 	$._ajax = function(options) {
-		var opts = jQuery.extend({}, $.uAjax.defaults, options);
+		var opts = jQuery.extend({}, $._ajax.defaults, options);
 
 		$.ajax({
 			type : "post",
-			url : $.uFullUrl(opts.url),
+			url : $._fullUrl(opts.url),
 			data : opts.params,
 			success : function(result) {
 				if (result.success) {

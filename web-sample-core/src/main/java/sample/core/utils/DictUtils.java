@@ -6,7 +6,7 @@ public class DictUtils {
 	public static final String NO = "0";
 
 	// User
-	public static final String USER_TYPE = "01";
+	public static final String USER_TYPE = "user_type";
 
 	public static final String USER_TYPE_ADMIN = "01";
 

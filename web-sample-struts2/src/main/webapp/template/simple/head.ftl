@@ -13,6 +13,7 @@
 <script src="${base}/js/doT.js"></script>
 
 <script src="${base}/js/utils.js"></script>
+<script src="${base}/js/default.js"></script>
 
 <#else>
 
@@ -30,6 +31,7 @@
 <script src="${base}/js/doT.min.js"></script>
 
 <script src="${base}/js/utils.js"></script>
+<script src="${base}/js/default.js"></script>
 
 </#if>
 

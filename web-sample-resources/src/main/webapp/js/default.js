@@ -6,7 +6,7 @@
 	$._save.defaults = {
 
 	};
-	
+
 	$._delete = function(options) {
 		var opts = jQuery.extend({}, $._delete.defaults, options);
 	};
@@ -15,3 +15,7 @@
 
 	};
 })(jQuery);
+
+$(function() {
+	$("form").validate();
+});

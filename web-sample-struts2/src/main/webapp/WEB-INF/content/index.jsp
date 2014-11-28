@@ -7,17 +7,31 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <s:head />
+<script type="text/javascript">
+	$(function() {
+		$("#login").click(function() {
+			$("form")._ajaxSubmit({
+				url : "login",
+				success : function(result) {
+					if (result.data) {
+						$._location("main")
+					}
+				}
+			});
+		});
+	});
+</script>
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4 col-md-offset-4">
-				<div class="login-panel panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Please Sign In</h3>
-					</div>
-					<div class="panel-body">
-						<form role="form">
+	<form role="form" autocomplete="off">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="login-panel panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">请登录</h3>
+						</div>
+						<div class="panel-body">
 							<fieldset>
 								<div class="form-group">
 									<input class="form-control" placeholder="用户名" name="username"
@@ -32,13 +46,15 @@
 										value="true">记住我
 									</label>
 								</div>
-								<a href="index.html" class="btn btn-lg btn-success btn-block">登录</a>
+								<a href="javascript:void(0)"
+									class="btn btn-lg btn-success btn-block" id="login">登录</a>
 							</fieldset>
-						</form>
+
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</form>
 </body>
 </html>

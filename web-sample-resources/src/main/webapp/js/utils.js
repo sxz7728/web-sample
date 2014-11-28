@@ -1,9 +1,25 @@
 (function($) {
-	$._fullUrl = function(url) {
+	$._url = function(url) {
 		return url.charAt(0) == '/' ? globals.APP_NAME + url : url;
 	};
 
-	$._notify = function(message) {
+	$._location = function(url) {
+		window.location.href = $._url(url);
+	};
+
+	$._notify = function(options) {
+		var opts = jQuery.extend({}, $._notify.defaults, options);
+	};
+
+	$._notify.defaults = {
+
+	};
+
+	$._confirm = function(options) {
+		var opts = jQuery.extend({}, $._confirm.defaults, options);
+	};
+
+	$._confirm.defaults = {
 
 	};
 
@@ -12,14 +28,17 @@
 
 		$.ajax({
 			type : "post",
-			url : $._fullUrl(opts.url),
+			url : $._url(opts.url),
 			data : opts.params,
+			dataType : "json",
 			success : function(result) {
 				if (result.success) {
 					opts.success(result);
 				} else {
 					if (result.error) {
-						alert(result.error);
+						$._notify({
+							message : result.error
+						});
 					}
 				}
 			}
@@ -41,7 +60,34 @@
 	};
 
 	$.fn._ajaxSubmit = function(options) {
+		var opts = jQuery.extend({}, $.fn._ajaxSubmit.defaults, options);
 
+		$(this).ajaxSubmit({
+			type : "post",
+			url : $._url(opts.url),
+			data : opts.params,
+			dataType : "json",
+			beforeSubmit : function(arr, $form, options) {
+				return $form.valid();
+			},
+
+			success : function(result) {
+				if (result.success) {
+					opts.success(result);
+				} else {
+					$._notify({
+						message : result.error
+					});
+				}
+			}
+		});
+
+	};
+
+	$.fn._ajaxSubmit.defaults = {
+		params : {},
+		success : function() {
+		}
 	};
 
 })(jQuery);

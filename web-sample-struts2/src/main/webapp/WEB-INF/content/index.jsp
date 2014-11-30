@@ -14,7 +14,7 @@
 				url : "login",
 				success : function(result) {
 					if (result.data) {
-						$._location("main")
+						$._location("main");
 					}
 				}
 			});
@@ -34,20 +34,20 @@
 						<div class="panel-body">
 							<fieldset>
 								<div class="form-group">
-									<input class="form-control" placeholder="用户名" name="username"
-										type="email" autofocus>
+									<input class="form-control required" placeholder="用户名"
+										name="username" type="email" autofocus>
 								</div>
 								<div class="form-group">
-									<input class="form-control" placeholder="密码" name="password"
-										type="password" value="">
+									<input class="form-control required" placeholder="密码"
+										name="password" type="password" value="">
 								</div>
 								<div class="checkbox">
 									<label> <input name="remember" type="checkbox"
 										value="true">记住我
 									</label>
 								</div>
-								<a href="javascript:void(0)"
-									class="btn btn-lg btn-success btn-block" id="login">登录</a>
+								<a id="login" href="javascript:void(0)"
+									class="btn btn-lg btn-success btn-block">登录</a>
 							</fieldset>
 
 						</div>

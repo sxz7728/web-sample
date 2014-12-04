@@ -23,6 +23,14 @@
 
 	};
 
+	$._openDialog = function(options) {
+		var opts = jQuery.extend({}, $._openDialog.defaults, options);
+	};
+
+	$._openDialog.defaults = {
+
+	};
+
 	$._ajax = function(options) {
 		var opts = jQuery.extend({}, $._ajax.defaults, options);
 

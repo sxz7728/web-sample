@@ -1,4 +1,12 @@
 (function($) {
+	$._openModify = function(options) {
+		var opts = jQuery.extend({}, $._save.defaults, options);
+	};
+
+	$._openModify.defaults = {
+
+	};
+
 	$._save = function(options) {
 		var opts = jQuery.extend({}, $._save.defaults, options);
 	};

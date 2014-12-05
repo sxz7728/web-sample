@@ -1,6 +1,7 @@
 package sample.core.service;
 
 import java.util.List;
+import java.util.Map;
 
 import sample.core.info.UserInfo;
 import sample.core.model.SysArea;
@@ -75,6 +76,14 @@ public interface SystemService {
 	public Integer countDict(QueryBuilder qb);
 
 	public Datagrid datagridDict(QueryBuilder qb);
+
+	public List<Map<String, ?>> hqlDictKeyValue(QueryBuilder qb);
+
+	public SysDict saveDict(String type, String dictKey, String dictValue,
+			String parentKey, Integer sequence, UserInfo userInfo);
+
+	public SysDict updateDict(Integer id, String dictKey, String dictValue,
+			String parentKey, Integer sequence, UserInfo userInfo);
 
 	// Area
 	public SysArea loadArea(Integer id);

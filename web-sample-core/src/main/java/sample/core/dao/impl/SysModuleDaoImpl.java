@@ -10,16 +10,16 @@ import sample.core.utils.QueryBuilder;
 @Repository
 public class SysModuleDaoImpl extends BaseDaoImpl<SysModule> implements
 		SysModuleDao {
-	public final String HQL_FIND;
+	public final String HQL_DATAGRID;
 
 	public SysModuleDaoImpl() {
-		HQL_FIND = " select " + " t.id as id, " + " t.deleted as deleted, "
+		HQL_DATAGRID = " select " + " t.id as id, " + " t.deleted as deleted, "
 				+ " t.operatorId as operatorId, "
 				+ " t.operateDate as operateDate " + " from "
 				+ modelClass.getSimpleName() + " t where 1 = 1 {0} {1} ";
 	}
 
 	public Datagrid datagrid(QueryBuilder qb) {
-		return datagrid(HQL_FIND, HQL_COUNT, qb);
+		return datagrid(HQL_DATAGRID, HQL_COUNT, qb);
 	}
 }

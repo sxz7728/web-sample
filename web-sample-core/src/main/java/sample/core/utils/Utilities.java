@@ -25,4 +25,8 @@ public class Utilities {
 	public static String getYesNo(boolean b) {
 		return b ? DictUtils.YES : DictUtils.NO;
 	}
+
+	public static boolean isValidId(Integer id) {
+		return id != null && id > 0;
+	}
 }

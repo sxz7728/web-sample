@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,6 @@ import org.apache.struts2.util.ServletContextAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import sample.core.info.UserInfo;
-import sample.core.model.SysDict;
 import sample.core.service.SystemService;
 import sample.core.utils.AuthFailedException;
 import sample.core.utils.DictUtils;
@@ -124,10 +124,10 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 		return dictUtils;
 	}
 
-	public List<SysDict> findDict(String dictType) {
+	public List<Map<String, ?>> findDict(String dictType) {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
 		qb.addWhere("and t.dictType = {0}", dictType);
-		return systemService.findDict(qb);
+		return systemService.hqlDictKeyValue(qb);
 	}
 
 	public void writeJson(JsonResult result) {

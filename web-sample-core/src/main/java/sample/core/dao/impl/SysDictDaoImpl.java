@@ -1,5 +1,8 @@
 package sample.core.dao.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import sample.core.dao.SysDictDao;
@@ -9,16 +12,26 @@ import sample.core.utils.QueryBuilder;
 
 @Repository
 public class SysDictDaoImpl extends BaseDaoImpl<SysDict> implements SysDictDao {
-	public final String HQL_FIND;
+	public final String HQL_DATAGRID;
+
+	public final String HQL_KEY_VALUE;
 
 	public SysDictDaoImpl() {
-		HQL_FIND = " select " + " t.id as id, " + " t.deleted as deleted, "
+		HQL_DATAGRID = " select " + " t.id as id, " + " t.deleted as deleted, "
 				+ " t.operatorId as operatorId, "
 				+ " t.operateDate as operateDate " + " from "
+				+ modelClass.getSimpleName() + " t where 1 = 1 {0} {1} ";
+
+		HQL_KEY_VALUE = " select " + " t.dictType as type, "
+				+ " t.dictKey as key, " + " t.dictValue as value " + " from "
 				+ modelClass.getSimpleName() + " t where 1 = 1 {0} {1} ";
 	}
 
 	public Datagrid datagrid(QueryBuilder qb) {
-		return datagrid(HQL_FIND, HQL_COUNT, qb);
+		return datagrid(HQL_DATAGRID, HQL_COUNT, qb);
+	}
+
+	public List<Map<String, ?>> hqlKeyValue(QueryBuilder qb) {
+		return hqlListMap(HQL_KEY_VALUE, qb);
 	}
 }

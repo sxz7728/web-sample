@@ -1,6 +1,7 @@
 package sample.core.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections4.ListUtils;
 import org.apache.commons.lang.StringUtils;
@@ -244,6 +245,41 @@ public class SystemServiceImpl implements SystemService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public Datagrid datagridDict(QueryBuilder qb) {
 		return sysDictDao.datagrid(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public List<Map<String, ?>> hqlDictKeyValue(QueryBuilder qb) {
+		return sysDictDao.hqlKeyValue(qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	public SysDict saveDict(String type, String dictKey, String dictValue,
+			String parentKey, Integer sequence, UserInfo userInfo) {
+		SysDict sysDict = new SysDict();
+		sysDict.setType(type);
+		sysDict.setDictKey(dictKey);
+		sysDict.setDictValue(dictValue);
+		sysDict.setParentKey(parentKey);
+		sysDict.setSequence(sequence);
+
+		sysDict.setDeleted(DictUtils.NO);
+		sysDict.setOperatorId(userInfo.getUserId());
+		sysDict.setOperateDate(userInfo.getOperateDate());
+		return sysDictDao.save(sysDict);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	public SysDict updateDict(Integer id, String dictKey, String dictValue,
+			String parentKey, Integer sequence, UserInfo userInfo) {
+		SysDict sysDict = sysDictDao.load(id);
+		sysDict.setDictKey(dictKey);
+		sysDict.setDictValue(dictValue);
+		sysDict.setParentKey(parentKey);
+		sysDict.setSequence(sequence);
+
+		sysDict.setOperatorId(userInfo.getUserId());
+		sysDict.setOperateDate(userInfo.getOperateDate());
+		return sysDictDao.update(sysDict);
 	}
 
 	// Area

@@ -30,6 +30,7 @@ import sample.core.model.SysUser;
 import sample.core.service.SystemService;
 import sample.core.utils.Datagrid;
 import sample.core.utils.DictUtils;
+import sample.core.utils.ModelUtils;
 import sample.core.utils.QueryBuilder;
 import sample.core.utils.QueryUtils;
 import sample.core.utils.Utilities;
@@ -84,8 +85,7 @@ public class SystemServiceImpl implements SystemService {
 		sysModule.setName(name);
 		sysModule.setSequence(sequence);
 		sysModule.setDeleted(DictUtils.NO);
-		sysModule.setOperatorId(userInfo.getUserId());
-		sysModule.setOperateDate(userInfo.getOperateDate());
+		ModelUtils.setOperator(sysModule, userInfo);
 		return sysModuleDao.save(sysModule);
 	}
 
@@ -95,8 +95,7 @@ public class SystemServiceImpl implements SystemService {
 		SysModule sysModule = sysModuleDao.load(id);
 		sysModule.setName(name);
 		sysModule.setSequence(sequence);
-		sysModule.setOperatorId(userInfo.getUserId());
-		sysModule.setOperateDate(userInfo.getOperateDate());
+		ModelUtils.setOperator(sysModule, userInfo);
 		return sysModuleDao.update(sysModule);
 	}
 
@@ -131,8 +130,7 @@ public class SystemServiceImpl implements SystemService {
 		sysMenu.setUrl(url);
 		sysMenu.setSequence(sequence);
 		sysMenu.setDeleted(DictUtils.NO);
-		sysMenu.setOperatorId(userInfo.getUserId());
-		sysMenu.setOperateDate(userInfo.getOperateDate());
+		ModelUtils.setOperator(sysMenu, userInfo);
 		return sysMenuDao.save(sysMenu);
 	}
 
@@ -144,8 +142,7 @@ public class SystemServiceImpl implements SystemService {
 		sysMenu.setName(name);
 		sysMenu.setUrl(url);
 		sysMenu.setSequence(sequence);
-		sysMenu.setOperatorId(userInfo.getUserId());
-		sysMenu.setOperateDate(userInfo.getOperateDate());
+		ModelUtils.setOperator(sysMenu, userInfo);
 		return sysMenuDao.update(sysMenu);
 	}
 
@@ -183,8 +180,7 @@ public class SystemServiceImpl implements SystemService {
 		sysRole.setSysMenus(sysMenus);
 
 		sysRole.setDeleted(DictUtils.NO);
-		sysRole.setOperatorId(userInfo.getUserId());
-		sysRole.setOperateDate(userInfo.getOperateDate());
+		ModelUtils.setOperator(sysRole, userInfo);
 		return sysRoleDao.save(sysRole);
 	}
 
@@ -200,8 +196,7 @@ public class SystemServiceImpl implements SystemService {
 		List<SysMenu> sysMenus = sysMenuDao.find(qb);
 		sysRole.setSysMenus(sysMenus);
 
-		sysRole.setOperatorId(userInfo.getUserId());
-		sysRole.setOperateDate(userInfo.getOperateDate());
+		ModelUtils.setOperator(sysRole, userInfo);
 		return sysRoleDao.save(sysRole);
 	}
 
@@ -263,8 +258,7 @@ public class SystemServiceImpl implements SystemService {
 		sysDict.setSequence(sequence);
 
 		sysDict.setDeleted(DictUtils.NO);
-		sysDict.setOperatorId(userInfo.getUserId());
-		sysDict.setOperateDate(userInfo.getOperateDate());
+		ModelUtils.setOperator(sysDict, userInfo);
 		return sysDictDao.save(sysDict);
 	}
 
@@ -277,8 +271,7 @@ public class SystemServiceImpl implements SystemService {
 		sysDict.setParentKey(parentKey);
 		sysDict.setSequence(sequence);
 
-		sysDict.setOperatorId(userInfo.getUserId());
-		sysDict.setOperateDate(userInfo.getOperateDate());
+		ModelUtils.setOperator(sysDict, userInfo);
 		return sysDictDao.update(sysDict);
 	}
 

@@ -1,31 +1,18 @@
 package sample.core.model;
 
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.google.gson.annotations.Expose;
 
 @Entity
 @Table(name = "sys_user")
-public class SysUser {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Access(AccessType.PROPERTY)
-	private Integer id;
+public class SysUser extends BaseModel {
 
 	private String username;
 
@@ -45,24 +32,6 @@ public class SysUser {
 	@JoinTable(name = "sys_user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
 	@Expose(serialize = false, deserialize = false)
 	private List<SysRole> sysRoles;
-
-	@Column(name = "deleted")
-	private String deleted;
-
-	@Column(name = "operator_id")
-	private Integer operatorId;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "operate_date")
-	private Date operateDate;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getUsername() {
 		return username;
@@ -126,29 +95,5 @@ public class SysUser {
 
 	public void setSysRoles(List<SysRole> sysRoles) {
 		this.sysRoles = sysRoles;
-	}
-
-	public String getDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(String deleted) {
-		this.deleted = deleted;
-	}
-
-	public Integer getOperatorId() {
-		return operatorId;
-	}
-
-	public void setOperatorId(Integer operatorId) {
-		this.operatorId = operatorId;
-	}
-
-	public Date getOperateDate() {
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate) {
-		this.operateDate = operateDate;
 	}
 }

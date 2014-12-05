@@ -1,33 +1,20 @@
 package sample.core.model;
 
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.google.gson.annotations.Expose;
 
 @Entity
 @Table(name = "sys_menu")
-public class SysMenu {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Access(AccessType.PROPERTY)
-	private Integer id;
-
+public class SysMenu extends BaseModel {
 	@Column(name = "parent_id")
 	private Integer parentId;
 
@@ -45,24 +32,6 @@ public class SysMenu {
 	@ManyToMany(mappedBy = "sysMenus")
 	@Expose(serialize = false, deserialize = false)
 	private List<SysRole> sysRoles;
-
-	@Column(name = "deleted")
-	private String deleted;
-
-	@Column(name = "operator_id")
-	private Integer operatorId;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "operate_date")
-	private Date operateDate;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public Integer getParentId() {
 		return parentId;
@@ -110,29 +79,5 @@ public class SysMenu {
 
 	public void setSysRoles(List<SysRole> sysRoles) {
 		this.sysRoles = sysRoles;
-	}
-
-	public String getDeleted() {
-		return deleted;
-	}
-
-	public void setDeleted(String deleted) {
-		this.deleted = deleted;
-	}
-
-	public Integer getOperatorId() {
-		return operatorId;
-	}
-
-	public void setOperatorId(Integer operatorId) {
-		this.operatorId = operatorId;
-	}
-
-	public Date getOperateDate() {
-		return operateDate;
-	}
-
-	public void setOperateDate(Date operateDate) {
-		this.operateDate = operateDate;
 	}
 }

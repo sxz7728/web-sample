@@ -243,8 +243,8 @@ public class SystemServiceImpl implements SystemService {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<Map<String, ?>> hqlDictKeyValue(QueryBuilder qb) {
-		return sysDictDao.hqlKeyValue(qb);
+	public List<Map<String, ?>> dictionaryDict(QueryBuilder qb) {
+		return sysDictDao.dictionary(qb);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)

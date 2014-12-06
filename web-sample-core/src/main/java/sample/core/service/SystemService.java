@@ -77,7 +77,7 @@ public interface SystemService {
 
 	public Datagrid datagridDict(QueryBuilder qb);
 
-	public List<Map<String, ?>> hqlDictKeyValue(QueryBuilder qb);
+	public List<Map<String, ?>> dictionaryDict(QueryBuilder qb);
 
 	public SysDict saveDict(String type, String dictKey, String dictValue,
 			String parentKey, Integer sequence, UserInfo userInfo);

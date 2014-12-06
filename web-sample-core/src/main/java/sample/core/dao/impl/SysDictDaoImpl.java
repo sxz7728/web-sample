@@ -14,7 +14,7 @@ import sample.core.utils.QueryBuilder;
 public class SysDictDaoImpl extends BaseDaoImpl<SysDict> implements SysDictDao {
 	public final String HQL_DATAGRID;
 
-	public final String HQL_KEY_VALUE;
+	public final String HQL_DICTIONARY;
 
 	public SysDictDaoImpl() {
 		HQL_DATAGRID = " select " + " t.id as id, " + " t.deleted as deleted, "
@@ -22,7 +22,7 @@ public class SysDictDaoImpl extends BaseDaoImpl<SysDict> implements SysDictDao {
 				+ " t.operateDate as operateDate " + " from "
 				+ modelClass.getSimpleName() + " t where 1 = 1 {0} {1} ";
 
-		HQL_KEY_VALUE = " select " + " t.dictType as type, "
+		HQL_DICTIONARY = " select " + " t.dictType as type, "
 				+ " t.dictKey as key, " + " t.dictValue as value " + " from "
 				+ modelClass.getSimpleName() + " t where 1 = 1 {0} {1} ";
 	}
@@ -31,7 +31,7 @@ public class SysDictDaoImpl extends BaseDaoImpl<SysDict> implements SysDictDao {
 		return datagrid(HQL_DATAGRID, HQL_COUNT, qb);
 	}
 
-	public List<Map<String, ?>> hqlKeyValue(QueryBuilder qb) {
-		return hqlListMap(HQL_KEY_VALUE, qb);
+	public List<Map<String, ?>> dictionary(QueryBuilder qb) {
+		return hqlListMap(HQL_DICTIONARY, qb);
 	}
 }

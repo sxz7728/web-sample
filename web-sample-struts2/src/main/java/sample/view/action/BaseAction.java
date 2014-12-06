@@ -127,7 +127,7 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 	public List<Map<String, ?>> findDict(String dictType) {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
 		qb.addWhere("and t.dictType = {0}", dictType);
-		return systemService.hqlDictKeyValue(qb);
+		return systemService.dictionaryDict(qb);
 	}
 
 	public void writeJson(JsonResult result) {

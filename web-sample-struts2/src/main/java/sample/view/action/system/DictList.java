@@ -28,8 +28,8 @@ public class DictList extends BaseAction {
 		writeJson(systemService.datagridDict(qb));
 	}
 
-	@Action("dictionaryDict")
-	public void keyValue() {
+	@Action("dictDictionary")
+	public void dictionary() {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
 		qb.addWhere("and t.dictType = {0}", dictType);
 		writeJson(systemService.dictionaryDict(qb));

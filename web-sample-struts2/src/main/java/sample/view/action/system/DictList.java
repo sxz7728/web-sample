@@ -16,19 +16,19 @@ public class DictList extends BaseAction {
 
 	private String dictType;
 
-	@Action("dictList")
+	@Action("listDict")
 	public String execute() {
 		return INPUT;
 	}
 
-	@Action("dictDatagrid")
+	@Action("datagridDict")
 	public void datagrid() {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
 		qb.addWhere("and t.dictType = {0}", dictType);
 		writeJson(systemService.datagridDict(qb));
 	}
 
-	@Action("dictDictionary")
+	@Action("dictionaryDict")
 	public void dictionary() {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
 		qb.addWhere("and t.dictType = {0}", dictType);

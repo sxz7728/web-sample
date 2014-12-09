@@ -8,7 +8,7 @@ import sample.core.service.SystemService;
 import sample.core.utils.Utilities;
 import sample.view.action.BaseAction;
 
-public class DictModify extends BaseAction {
+public class DictEdit extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -18,7 +18,7 @@ public class DictModify extends BaseAction {
 
 	private SysDict sysDict;
 
-	@Action("dictModify")
+	@Action("editDict")
 	public String execute() {
 		if (Utilities.isValidId(id)) {
 			sysDict = systemService.loadDict(id);
@@ -27,7 +27,7 @@ public class DictModify extends BaseAction {
 		return INPUT;
 	}
 
-	@Action("dictSave")
+	@Action("saveDict")
 	public void save() {
 		if (!Utilities.isValidId(id)) {
 			sysDict = systemService.saveDict(sysDict.getType(),

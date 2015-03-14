@@ -33,7 +33,7 @@ public interface BaseDao<T> {
 
 	public List<Map<String, ?>> hqlListMap(String hql, QueryBuilder qb);
 
-	public <U> List<U> hqlListBean(Class<U> clazz, String hql, QueryBuilder qb);
+	public <U> List<U> hqlListBean(String hql, QueryBuilder qb, Class<U> clazz);
 
 	public <U> U hqlUnique(String hql, QueryBuilder qb);
 
@@ -41,7 +41,7 @@ public interface BaseDao<T> {
 
 	public List<Map<String, ?>> sqlListMap(String sql, QueryBuilder qb);
 
-	public <U> List<U> sqlListBean(Class<U> clazz, String sql, QueryBuilder qb);
+	public <U> List<U> sqlListBean(String sql, QueryBuilder qb, Class<U> clazz);
 
 	public <U> U sqlUnique(String sql, QueryBuilder qb);
 }

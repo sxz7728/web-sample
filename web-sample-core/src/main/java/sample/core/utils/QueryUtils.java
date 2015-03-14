@@ -5,13 +5,15 @@ import java.util.Collection;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
+import com.google.common.collect.Lists;
+
 public class QueryUtils {
-	public static QueryBuilder addWhereNotDeleted(QueryBuilder qb) {
-		qb.addWhere("and t.deleted = {0}", DictUtils.NO);
-		return qb;
+	public static QueryBuilder addWhere(QueryBuilder qb, String str,
+			Object... params) {
+		return qb.addWhere(str, params);
 	}
 
-	public static QueryBuilder addWhereIfNotEmpty(QueryBuilder qb, String str,
+	public static QueryBuilder addWhereIfNotNull(QueryBuilder qb, String str,
 			Object param) {
 		if (param != null) {
 			qb.addWhere(str, param);
@@ -38,12 +40,19 @@ public class QueryUtils {
 		return qb;
 	}
 
-	public static QueryBuilder addWhereIfEmpty(QueryBuilder qb, String str,
+	public static QueryBuilder addWhereWithDefault(QueryBuilder qb, String str,
 			Collection<?> param, Object obj) {
-		if (!CollectionUtils.isEmpty(param)) {
-			qb.addWhere(str, Utilities.ifEmpty(param, obj));
-		}
+		return qb.addWhere(str,
+				CollectionUtils.isEmpty(param) ? Lists.newArrayList(obj)
+						: param);
+	}
 
+	public static QueryBuilder addWhereNotDeleted(QueryBuilder qb) {
+		qb.addWhere("and t.deleted = {0}", DictUtils.NO);
 		return qb;
+	}
+	
+	public static QueryBuilder addOrder(QueryBuilder qb, String str) {
+		return qb.addOrder(str);
 	}
 }

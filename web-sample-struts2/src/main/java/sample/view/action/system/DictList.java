@@ -24,14 +24,14 @@ public class DictList extends BaseAction {
 	@Action("datagridDict")
 	public void datagrid() {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
-		qb.addWhere("and t.dictType = {0}", dictType);
+		QueryUtils.addWhere(qb, "and t.dictType = {0}", dictType);
 		writeJson(systemService.datagridDict(qb));
 	}
 
 	@Action("dictionaryDict")
 	public void dictionary() {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
-		qb.addWhere("and t.dictType = {0}", dictType);
+		QueryUtils.addWhere(qb, "and t.dictType = {0}", dictType);
 		writeJson(systemService.dictionaryDict(qb));
 	}
 

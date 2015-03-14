@@ -25,9 +25,9 @@ public class Main extends BaseAction {
 	@Action("main")
 	public String execute() {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
-		QueryUtils.addWhereIfEmpty(qb, "and t.id in {0}", getUserInfo()
+		QueryUtils.addWhereWithDefault(qb, "and t.id in {0}", getUserInfo()
 				.getModuleIds(), -1);
-		qb.addOrder("sequence");
+		QueryUtils.addOrder(qb, "sequence");
 		sysModules = systemService.findModule(qb);
 		return INPUT;
 	}
@@ -35,10 +35,10 @@ public class Main extends BaseAction {
 	@Action("sidebar")
 	public void sidebar() {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
-		qb.addWhere("and t.sysModule.id = {0}", moduleId);
-		QueryUtils.addWhereIfEmpty(qb, "and t.id in {0}", getUserInfo()
+		QueryUtils.addWhere(qb, "and t.sysModule.id = {0}", moduleId);
+		QueryUtils.addWhereWithDefault(qb, "and t.id in {0}", getUserInfo()
 				.getMenuIds(), -1);
-		qb.addOrder("sequence");
+		QueryUtils.addOrder(qb, "sequence");
 		writeJson(systemService.findMenu(qb));
 	}
 

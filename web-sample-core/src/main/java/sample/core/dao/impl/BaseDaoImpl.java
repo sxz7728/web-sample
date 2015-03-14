@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import sample.core.dao.BaseDao;
+import sample.core.utils.ColumnUtils;
 import sample.core.utils.Datagrid;
 import sample.core.utils.QueryBuilder;
 import sample.core.utils.Utilities;
@@ -28,6 +29,8 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	public final String HQL_FIND;
 
 	public final String HQL_COUNT;
+
+	public final String HQL_DATAGRID;
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -49,6 +52,9 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 		HQL_COUNT = " select count(*) from " + modelClass.getSimpleName()
 				+ " t where 1 = 1 {0} ";
+
+		HQL_DATAGRID = " select " + ColumnUtils.column("t.id") + " {0} from "
+				+ modelClass.getSimpleName() + " t where 1 = 1 {1} {2} ";
 	}
 
 	protected Session getSession() {
@@ -164,6 +170,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
+	public Datagrid datagrid(QueryBuilder qb) {
+		return datagrid(HQL_DATAGRID, HQL_COUNT, qb);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	protected Datagrid datagrid(String hqlFind, String hqlCount, QueryBuilder qb) {
 		Datagrid result = new Datagrid();
 		result.setRows(hqlListMap(hqlFind, qb));
@@ -190,7 +201,10 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public List<Map<String, ?>> hqlListMap(String hql, QueryBuilder qb) {
 		Query query = getSession().createQuery(
-				Utilities.format(hql, qb.getWhere(), qb.getOrder()));
+				Utilities.format(hql,
+						(qb.hasColumn() ? "," : "") + qb.getColumn(),
+						qb.getWhere(), qb.getOrder()));
+		setColumnParams(query, qb);
 		setWhereParams(query, qb);
 		setFirstResult(query, qb);
 		setMaxResults(query, qb);
@@ -200,7 +214,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public <U> List<U> hqlListBean(Class<U> clazz, String hql, QueryBuilder qb) {
+	public <U> List<U> hqlListBean(String hql, QueryBuilder qb, Class<U> clazz) {
 		Query query = getSession().createQuery(
 				Utilities.format(hql, qb.getWhere(), qb.getOrder()));
 		setWhereParams(query, qb);
@@ -234,7 +248,10 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public List<Map<String, ?>> sqlListMap(String sql, QueryBuilder qb) {
 		Query query = getSession().createSQLQuery(
-				Utilities.format(sql, qb.getWhere(), qb.getOrder()));
+				Utilities.format(sql,
+						(qb.hasColumn() ? "," : "") + qb.getColumn(),
+						qb.getWhere(), qb.getOrder()));
+		setColumnParams(query, qb);
 		setWhereParams(query, qb);
 		setFirstResult(query, qb);
 		setMaxResults(query, qb);
@@ -244,7 +261,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public <U> List<U> sqlListBean(Class<U> clazz, String sql, QueryBuilder qb) {
+	public <U> List<U> sqlListBean(String sql, QueryBuilder qb, Class<U> clazz) {
 		Query query = getSession().createSQLQuery(
 				Utilities.format(sql, qb.getWhere(), qb.getOrder()));
 		setWhereParams(query, qb);

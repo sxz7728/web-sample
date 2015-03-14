@@ -12,27 +12,23 @@ public class JsonUtils {
 			GsonBuilder gb = new GsonBuilder();
 			gb.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
 			gb.addSerializationExclusionStrategy(new ExclusionStrategy() {
-				@Override
 				public boolean shouldSkipField(FieldAttributes fieldAttributes) {
 					final Expose expose = fieldAttributes
 							.getAnnotation(Expose.class);
 					return expose != null && !expose.serialize();
 				}
 
-				@Override
 				public boolean shouldSkipClass(Class<?> aClass) {
 					return false;
 				}
 			});
 			gb.addDeserializationExclusionStrategy(new ExclusionStrategy() {
-				@Override
 				public boolean shouldSkipField(FieldAttributes fieldAttributes) {
 					final Expose expose = fieldAttributes
 							.getAnnotation(Expose.class);
 					return expose != null && !expose.deserialize();
 				}
 
-				@Override
 				public boolean shouldSkipClass(Class<?> aClass) {
 					return false;
 				}

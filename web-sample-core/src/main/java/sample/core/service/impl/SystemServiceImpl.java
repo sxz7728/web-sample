@@ -33,7 +33,6 @@ import sample.core.utils.DictUtils;
 import sample.core.utils.ModelUtils;
 import sample.core.utils.QueryBuilder;
 import sample.core.utils.QueryUtils;
-import sample.core.utils.Utilities;
 
 @Service
 public class SystemServiceImpl implements SystemService {
@@ -175,7 +174,7 @@ public class SystemServiceImpl implements SystemService {
 		sysRole.setSequence(sequence);
 
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
-		qb.addWhere("and t.id in {0}", Utilities.ifEmpty(menuIds, -1));
+		QueryUtils.addWhereWithDefault(qb, "and t.id in {0}", menuIds, -1);
 		List<SysMenu> sysMenus = sysMenuDao.find(qb);
 		sysRole.setSysMenus(sysMenus);
 
@@ -192,7 +191,7 @@ public class SystemServiceImpl implements SystemService {
 		sysRole.setSequence(sequence);
 
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
-		qb.addWhere("and t.id in {0}", Utilities.ifEmpty(menuIds, -1));
+		QueryUtils.addWhereWithDefault(qb, "and t.id in {0}", menuIds, -1);
 		List<SysMenu> sysMenus = sysMenuDao.find(qb);
 		sysRole.setSysMenus(sysMenus);
 
@@ -321,7 +320,7 @@ public class SystemServiceImpl implements SystemService {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public UserInfo login(String username, String password) {
 		QueryBuilder qb = QueryUtils.addWhereNotDeleted(new QueryBuilder());
-		qb.addWhere("and t.username = {0}", username);
+		QueryUtils.addWhere(qb, "and t.username = {0}", username);
 
 		List<SysUser> sysUsers = sysUserDao.find(qb);
 
@@ -352,7 +351,7 @@ public class SystemServiceImpl implements SystemService {
 				List<Integer> menuIds = Lists.newArrayList();
 
 				for (SysMenu sysMenu : sysMenus) {
-					if (!Utilities.getYesNo(sysMenu.getDeleted())) {
+					if (!DictUtils.getYesNo(sysMenu.getDeleted())) {
 						if (!menuIds.contains(sysMenu.getId())) {
 							menuIds.add(sysMenu.getId());
 						}

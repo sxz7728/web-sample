@@ -19,7 +19,6 @@ import com.google.gson.stream.JsonWriter;
 public class HibernateProxyTypeAdapter extends TypeAdapter<HibernateProxy> {
 
 	public static final TypeAdapterFactory FACTORY = new TypeAdapterFactory() {
-		@Override
 		@SuppressWarnings("unchecked")
 		public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
 			return (HibernateProxy.class.isAssignableFrom(type.getRawType()) ? (TypeAdapter<T>) new HibernateProxyTypeAdapter(

@@ -1,6 +1,6 @@
 (function($) {
 	$._openModify = function(options) {
-		var opts = jQuery.extend({}, $._save.defaults, options);
+		var opts = jQuery.extend({}, $._openModify.defaults, options);
 	};
 
 	$._openModify.defaults = {
@@ -22,6 +22,22 @@
 	$._delete.defaults = {
 
 	};
+
+	$.fn._selectDict = function(options) {
+		var opts = jQuery.extend({}, $._selectDict.defaults, options);
+		var $this = $(this);
+
+		opts.params = {
+			type : opts.type
+		};
+
+		$this._ajaxSelect(opts);
+	};
+
+	$.fn._selectDict.defaults = {
+		url : "/system/dictionaryDict"
+	};
+
 })(jQuery);
 
 $(function() {
